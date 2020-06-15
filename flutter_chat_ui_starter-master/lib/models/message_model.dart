@@ -1,6 +1,7 @@
 import 'package:flutter_chat_ui_starter/models/user_model.dart';
+import 'package:equatable/equatable.dart';
 
-class Message {
+class Message extends Equatable {
   final User sender;
   final String
       time; // Would usually be type DateTime or Firebase Timestamp in production apps
@@ -15,6 +16,10 @@ class Message {
     this.isLiked,
     this.unread,
   });
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [];
 }
 
 // YOU - current user
