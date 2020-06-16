@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body:  BlocProvider(
         create: (context) {
-          return TodosBloc()..add(TodosLoaded(User(id: 1)));
+          return TodosBloc()..add(TodosLoadedEvent(User(id: 1)));
         },
         child: home_screeen(context),
       ),
@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return BlocConsumer<TodosBloc, TodosState>(
       listener: (context,state){
         print(state);
-        if(state is ChatLoaded){
+        if(state is RecentChatLoaded){
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -68,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
         if(state is TodosLoadFailure){
 
         }
-        if(state is ChatLoading){
+        if(state is RecentChatLoading){
           return LoadingIndicator();
         }
         return LoadingIndicator();
@@ -141,7 +141,7 @@ Widget RecentChats(BuildContext context) {
                 {
                   print("click on user");
                   print(chat.sender.id);
-                 return BlocProvider.of<TodosBloc>(context).add(ChatLoadedEvent(chat.sender));
+                  return BlocProvider.of<TodosBloc>(context).add(RecentChatLoadedEvent(chat.sender));
                 },
 //                onTap: ()=> Navigator.push(
 //                  context,

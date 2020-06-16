@@ -10,11 +10,11 @@ abstract class TodosEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class TodosLoaded extends TodosEvent {
+class TodosLoadedEvent extends TodosEvent {
 
   final User user;
 
-  const TodosLoaded(this.user);
+  const TodosLoadedEvent(this.user);
 
   @override
   List<Object> get props => [user];
@@ -23,22 +23,22 @@ class TodosLoaded extends TodosEvent {
   String toString() => 'TodoAdded { todo: ${user.name} }';
 
 }
-class TodosLoaded1 extends TodosEvent {
+class TodosLoaded1Event extends TodosEvent {
 
 
 }
-class TodosLoaded3 extends TodosEvent {
+class TodosLoaded3Event extends TodosEvent {
 
 
 }
 
 
 
-class ChatLoadingEvent extends TodosEvent {
+class RecentChatLoadingEvent extends TodosEvent {
 
   final User user;
 
-  const ChatLoadingEvent(this.user);
+  const RecentChatLoadingEvent(this.user);
 
   @override
   List<Object> get props => [user];
@@ -47,11 +47,11 @@ class ChatLoadingEvent extends TodosEvent {
   String toString() => 'ChatLoading { todo: ${user.name} }';
 }
 
-class ChatLoadedEvent extends TodosEvent {
+class RecentChatLoadedEvent extends TodosEvent {
 
   final User user;
 
-  const ChatLoadedEvent(this.user);
+  const RecentChatLoadedEvent(this.user);
 
   @override
   List<Object> get props => [user];

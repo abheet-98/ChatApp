@@ -3,51 +3,53 @@ import 'package:flutter_chat_ui_starter/models/models.dart';
 
 import '../../models/user_model.dart';
 
-abstract class TodosState extends Equatable {
-  const TodosState();
+abstract class ChatsEvent extends Equatable {
+  const ChatsEvent();
 
   @override
   List<Object> get props => [];
 }
 
-class TodosLoadInProgress extends TodosState {
-
-
-}
-
-class TodosLoadFailure extends TodosState {}
-
-class TodosLoadSuccess extends TodosState {
+class ChatsLoadedEvent extends ChatsEvent {
 
   final User user;
 
-  const TodosLoadSuccess(this.user);
+  const ChatsLoadedEvent(this.user);
 
   @override
   List<Object> get props => [user];
 
   @override
-  String toString() => 'TodosLoadSuccess { todo: ${user.name} }';
-}
+  String toString() => 'TodoAdded { todo: ${user.name} }';
 
-class RecentChatLoading extends TodosState {
+}
+class ChatsLoaded1Event extends ChatsEvent {
 
   final User user;
 
-  const RecentChatLoading(this.user);
+  const ChatsLoaded1Event(this.user);
 
   @override
   List<Object> get props => [user];
 
   @override
   String toString() => 'ChatLoading { todo: ${user.name} }';
+
+}
+class ChatsLoaded3Event extends ChatsEvent {
+
+
 }
 
-class RecentChatLoaded extends TodosState {
+
+
+
+
+class ChatLoadedEvent extends ChatsEvent {
 
   final User user;
 
-  const RecentChatLoaded(this.user);
+  const ChatLoadedEvent(this.user);
 
   @override
   List<Object> get props => [user];

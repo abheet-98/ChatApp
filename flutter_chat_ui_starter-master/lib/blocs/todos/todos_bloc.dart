@@ -12,10 +12,10 @@ class TodosBloc extends Bloc<TodosEvent, TodosState> {
 
   @override
   Stream<TodosState> mapEventToState(TodosEvent event) async* {
-    if (event is TodosLoaded) {
+    if (event is TodosLoadedEvent) {
       yield* _mapTodosLoadedToState(event);
     }
-    if (event is ChatLoadedEvent) {
+    if (event is RecentChatLoadedEvent) {
       yield* _mapChatLoadedToState(event);
     }
 
@@ -33,10 +33,10 @@ class TodosBloc extends Bloc<TodosEvent, TodosState> {
 
   Stream<TodosState> _mapChatLoadedToState(event) async* {
     try {
-        yield ChatLoading(event.user);
+        yield RecentChatLoading(event.user);
         final user = event.user;
         final respose = user; //api call 2send
-        yield ChatLoaded(respose);
+        yield RecentChatLoaded(respose);
     } catch (_) {
       yield TodosLoadFailure();
     }
