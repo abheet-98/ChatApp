@@ -132,11 +132,9 @@ List<Message> messages = [
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
-
       body: BlocProvider(
         create: (context){
-          return ChatsBloc()..add(ChatsLoadedEvent(User(id: 1)));
+          return ChatsBloc()..add(ChatsLoadedEvent(widget.user));
         },
         child: chats_screeen(context,messages),
       ),
@@ -147,8 +145,14 @@ List<Message> messages = [
 Widget chats_screeen(BuildContext context,List<Message> message){
   return BlocBuilder<ChatsBloc,ChatsState>(
     builder:(context,state){
+      print(state);
       if(state is ChatsLoadInProgress){
           return LoadingIndicator();
+        }
+        if(state is ChatsLoaded){
+          final user = state.user;
+
+         return chat_screeen_widget(user,context,message);
         }
         if(state is ChatsLoadSuccess){
           final user = state.user;
@@ -265,7 +269,7 @@ Widget chat_screeen_widget(User user,context,List<Message> messages){
                     ),
                     Expanded(
                       child: TextField(
-                        controller: _textController ,
+//                        controller: _textController ,
                         decoration: InputDecoration.collapsed(
                           hintText: "Type a message",
                         ),
@@ -275,7 +279,7 @@ Widget chat_screeen_widget(User user,context,List<Message> messages){
                       icon: Icon(Icons.send),
                       iconSize: 25.0,
                       color: Theme.of(context).primaryColor,
-                      onPressed: _onSubmit,
+//                      onPressed: _onSubmit,
                     ),
 
                   ],

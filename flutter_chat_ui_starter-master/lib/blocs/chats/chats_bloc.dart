@@ -15,7 +15,7 @@ class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
     if (event is ChatsLoaded) {
       yield* _mapTodosLoadedToState(event);
     }
-    if (event is ChatLoadedEvent) {
+    if (event is ChatsLoadedEvent) {
       yield* _mapChatLoadedToState(event);
     }
 
@@ -33,6 +33,7 @@ class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
 
   Stream<ChatsState> _mapChatLoadedToState(event) async* {
     try {
+
         yield ChatsLoading(event.user);
         final user = event.user;
         final respose = user; //api call 2send
