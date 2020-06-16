@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return BlocConsumer<RecentRequestBloc, RecentRequestState>(
       listener: (context,state){
         print(state);
-        if(state is RecentChatLoaded){
+        if(state is MessageShow){
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -139,7 +139,7 @@ Widget RecentChats(BuildContext context) {
                 {
                   print("click on user");
                   print(chat.sender.id);
-                  return BlocProvider.of<ChatsBloc>(context).add(ChatsLoadedEvent(chat.sender));
+                  return BlocProvider.of<RecentRequestBloc>(context).add(MessageShowEvent(chat.sender));
                 },
 //                onTap: ()=> Navigator.push(
 //                  context,

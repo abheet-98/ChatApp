@@ -23,3 +23,17 @@ class RecentRequestLoadedEvent extends RecentRequestEvent {
   String toString() => 'RecentRequestLoaded { request: ${user.name} }';
 
 }
+
+class MessageShowEvent extends RecentRequestEvent {
+
+  final User user;
+
+  const MessageShowEvent(this.user);
+
+  @override
+  List<Object> get props => [user];
+
+  @override
+  String toString() => 'RecentRequestLoaded { request: ${user.name} }';
+
+}

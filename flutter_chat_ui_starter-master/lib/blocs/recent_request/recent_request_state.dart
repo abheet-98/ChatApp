@@ -55,4 +55,17 @@ class RecentChatLoaded extends RecentRequestState {
 
   @override
   String toString() => 'ChatLoading { todo: ${user.name} }';
-} 
+}
+
+class MessageShow extends RecentRequestState {
+
+  final User user;
+
+  const MessageShow(this.user);
+
+  @override
+  List<Object> get props => [user];
+
+  @override
+  String toString() => 'ChatLoading { todo: ${user.name} }';
+}

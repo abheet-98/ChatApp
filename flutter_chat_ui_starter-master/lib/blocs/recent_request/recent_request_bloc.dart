@@ -15,6 +15,9 @@ class RecentRequestBloc extends Bloc<RecentRequestEvent, RecentRequestState> {
     if (event is RecentRequestLoadedEvent) {
       yield* _mapTodosLoadedToState(event);
     }
+    if (event is MessageShowEvent) {
+      yield* _mapMessageShowToState(event);
+    }
 
   }
 
@@ -23,6 +26,16 @@ class RecentRequestBloc extends Bloc<RecentRequestEvent, RecentRequestState> {
         final user = event.user;
         final respose = user; //api call
         yield RecentRequestLoadSuccess(respose);
+    } catch (_) {
+      yield RecentRequestLoadFailure();
+    }
+  }
+
+  Stream<RecentRequestState> _mapMessageShowToState(event) async* {
+    try {
+        final user = event.user;
+        final respose = user; //api call
+        yield MessageShow(respose);
     } catch (_) {
       yield RecentRequestLoadFailure();
     }
