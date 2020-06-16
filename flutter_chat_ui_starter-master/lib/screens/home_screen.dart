@@ -4,8 +4,8 @@ import 'package:flutter_chat_ui_starter/blocs/blocs.dart';
 
 import '../models/message_model.dart';
 import '../models/user_model.dart';
-import 'RecentChats.dart';
-import 'chatscreen.dart';
+import 'recent_requests.dart';
+import 'request_message.dart';
 import 'loading_indicator.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body:  BlocProvider(
         create: (context) {
-          return TodosBloc()..add(TodosLoadedEvent(User(id: 1)));
+          return RecentRequestBloc()..add(RecentRequestLoadedEvent(User(id: 1)));
         },
         child: home_screeen(context),
       ),
@@ -42,14 +42,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
   Widget home_screeen(BuildContext context) {
-    return BlocConsumer<TodosBloc, TodosState>(
+    return BlocConsumer<RecentRequestBloc, RecentRequestState>(
       listener: (context,state){
         print(state);
         if(state is RecentChatLoaded){
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (_) => ChatScreen(user:state.user),
+              builder: (_) => RequestMessagePage(user:state.user),
             ),
           );
         }
@@ -57,20 +57,18 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       builder: (context, state) {
         print(state);
-        if(state is TodosLoadInProgress){
+        if(state is RecentRequestLoadInProgress){
           return LoadingIndicator();
         }
-        if(state is TodosLoadSuccess){
+        if(state is RecentRequestLoadSuccess){
           final user = state.user;
 
          return home_screeen_widget(user,context);
         }
-        if(state is TodosLoadFailure){
+        if(state is RecentRequestLoadFailure){
 
         }
-        if(state is RecentChatLoading){
-          return LoadingIndicator();
-        }
+        
         return LoadingIndicator();
       },
     );
@@ -141,7 +139,7 @@ Widget RecentChats(BuildContext context) {
                 {
                   print("click on user");
                   print(chat.sender.id);
-                  return BlocProvider.of<TodosBloc>(context).add(RecentChatLoadedEvent(chat.sender));
+                  return BlocProvider.of<ChatsBloc>(context).add(ChatsLoadedEvent(chat.sender));
                 },
 //                onTap: ()=> Navigator.push(
 //                  context,

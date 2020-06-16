@@ -7,21 +7,20 @@ import 'package:flutter_chat_ui_starter/blocs/blocs.dart';
 
 import '../models/message_model.dart';
 import '../models/user_model.dart';
-import 'RecentChats.dart';
-import 'chatscreen.dart';
+
 import 'loading_indicator.dart';
 
 
-class ChatScreen extends StatefulWidget {
+class RequestMessagePage extends StatefulWidget {
 
   final User user;
 
-  ChatScreen({this.user});
+  RequestMessagePage({this.user});
   @override
-  _ChatScreenState createState() => _ChatScreenState();
+  _RequestMessagePageState createState() => _RequestMessagePageState();
 }
 
-class _ChatScreenState extends State<ChatScreen> {
+class _RequestMessagePageState extends State<RequestMessagePage> {
   bool _flag = false; 
 
   // EXAMPLE MESSAGES IN CHAT SCREEN
@@ -149,11 +148,6 @@ Widget chats_screeen(BuildContext context,List<Message> message){
       if(state is ChatsLoadInProgress){
           return LoadingIndicator();
         }
-        if(state is ChatsLoaded){
-          final user = state.user;
-
-         return chat_screeen_widget(user,context,message);
-        }
         if(state is ChatsLoadSuccess){
           final user = state.user;
 
@@ -161,9 +155,6 @@ Widget chats_screeen(BuildContext context,List<Message> message){
         }
         if(state is ChatsLoadFailure){
 
-        }
-        if(state is ChatsLoading){
-          return LoadingIndicator();
         }
         return LoadingIndicator();
     } ,

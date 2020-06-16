@@ -3,34 +3,34 @@ import 'package:flutter_chat_ui_starter/models/models.dart';
 
 import '../../models/user_model.dart';
 
-abstract class TodosState extends Equatable {
-  const TodosState();
+abstract class RecentRequestState extends Equatable {
+  const RecentRequestState();
 
   @override
   List<Object> get props => [];
 }
 
-class TodosLoadInProgress extends TodosState {
+class RecentRequestLoadInProgress extends RecentRequestState {
 
 
 }
 
-class TodosLoadFailure extends TodosState {}
+class RecentRequestLoadFailure extends RecentRequestState {}
 
-class TodosLoadSuccess extends TodosState {
+class RecentRequestLoadSuccess extends RecentRequestState {
 
   final User user;
 
-  const TodosLoadSuccess(this.user);
+  const RecentRequestLoadSuccess(this.user);
 
   @override
   List<Object> get props => [user];
 
   @override
-  String toString() => 'TodosLoadSuccess { todo: ${user.name} }';
+  String toString() => 'RecentRequestLoadSuccess { todo: ${user.name} }';
 }
 
-class RecentChatLoading extends TodosState {
+/* class RecentChatLoading extends RecentRequestState {
 
   final User user;
 
@@ -42,8 +42,9 @@ class RecentChatLoading extends TodosState {
   @override
   String toString() => 'ChatLoading { todo: ${user.name} }';
 }
+*/
 
-class RecentChatLoaded extends TodosState {
+class RecentChatLoaded extends RecentRequestState {
 
   final User user;
 
@@ -54,4 +55,4 @@ class RecentChatLoaded extends TodosState {
 
   @override
   String toString() => 'ChatLoading { todo: ${user.name} }';
-}
+} 

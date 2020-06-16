@@ -3,23 +3,23 @@ import 'package:flutter_chat_ui_starter/models/models.dart';
 
 import '../../models/user_model.dart';
 
-abstract class ChatsEvent extends Equatable {
-  const ChatsEvent();
+abstract class RecentRequestEvent extends Equatable {
+  const RecentRequestEvent();
 
   @override
   List<Object> get props => [];
 }
 
-class ChatsLoadedEvent extends ChatsEvent {
+class RecentRequestLoadedEvent extends RecentRequestEvent {
 
   final User user;
 
-  const ChatsLoadedEvent(this.user);
+  const RecentRequestLoadedEvent(this.user);
 
   @override
   List<Object> get props => [user];
 
   @override
-  String toString() => 'Chats { chats: ${user.name} }';
+  String toString() => 'RecentRequestLoaded { request: ${user.name} }';
 
 }

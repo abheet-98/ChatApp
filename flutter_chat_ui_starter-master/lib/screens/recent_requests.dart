@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_chat_ui_starter/screens/chatscreen.dart';
-
+import 'request_message.dart';
 import '../models/message_model.dart';
 
-class RecentChats extends StatefulWidget {
+class RecentRequestsPage extends StatefulWidget {
   @override
-  _RecentChatsState createState() => _RecentChatsState();
+  _RecentRequestsPageState createState() => _RecentRequestsPageState();
 }
 
-class _RecentChatsState extends State<RecentChats> {
+class _RecentRequestsPageState extends State<RecentRequestsPage> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -34,7 +33,7 @@ class _RecentChatsState extends State<RecentChats> {
                 onTap: ()=> Navigator.push(
                   context, 
                   MaterialPageRoute(
-                    builder: (_) => ChatScreen(user:chat.sender),
+                    builder: (_) => RequestMessagePage(user:chat.sender),
                   ),
                 ),
                 child: Container(

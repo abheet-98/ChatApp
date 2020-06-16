@@ -12,34 +12,22 @@ class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
 
   @override
   Stream<ChatsState> mapEventToState(ChatsEvent event) async* {
-    if (event is ChatsLoaded) {
-      yield* _mapTodosLoadedToState(event);
-    }
+    
     if (event is ChatsLoadedEvent) {
       yield* _mapChatLoadedToState(event);
     }
 
   }
 
-  Stream<ChatsState> _mapTodosLoadedToState(event) async* {
-    try {
-        final user = event.user;
-        final respose = user; //api call
-        yield ChatsLoadSuccess(respose);
-    } catch (_) {
-      yield ChatsLoadFailure();
-    }
-  }
-
   Stream<ChatsState> _mapChatLoadedToState(event) async* {
     try {
 
-        yield ChatsLoading(event.user);
+        yield ChatsLoadInProgress();
         final user = event.user;
         final respose = user; //api call 2send
-        yield ChatsLoaded(respose);
+        yield ChatsLoadSuccess(respose);
     } catch (_) {
-      yield ChatsLoadFailure();
+      yield ChatsLoadFailure(event.user);
     }
   }
 

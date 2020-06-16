@@ -12,10 +12,28 @@ abstract class ChatsState extends Equatable {
 
 class ChatsLoadInProgress extends ChatsState {
 
+  const ChatsLoadInProgress();
+
+  @override
+  List<Object> get props => [];
+
+  @override
+  String toString() => 'ChatsLoadInProgress ';
 
 }
 
-class ChatsLoadFailure extends ChatsState {}
+class ChatsLoadFailure extends ChatsState {
+  final User user;
+
+  const ChatsLoadFailure(this.user);
+
+  @override
+  List<Object> get props => [user];
+
+  @override
+  String toString() => 'ChatsLoadFailure { chats: ${user.name} }';
+
+}
 
 class ChatsLoadSuccess extends ChatsState {
 
@@ -27,31 +45,8 @@ class ChatsLoadSuccess extends ChatsState {
   List<Object> get props => [user];
 
   @override
-  String toString() => 'TodosLoadSuccess { todo: ${user.name} }';
+  String toString() => 'ChatsLoadSuccess { chats: ${user.name} }';
 }
 
-class ChatsLoading extends ChatsState {
 
-  final User user;
 
-  const ChatsLoading(this.user);
-
-  @override
-  List<Object> get props => [user];
-
-  @override
-  String toString() => 'ChatLoading { todo: ${user.name} }';
-}
-
-class ChatsLoaded extends ChatsState {
-
-  final User user;
-
-  const ChatsLoaded(this.user);
-
-  @override
-  List<Object> get props => [user];
-
-  @override
-  String toString() => 'ChatLoading { todo: ${user.name} }';
-}
