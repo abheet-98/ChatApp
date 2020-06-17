@@ -87,7 +87,7 @@ class RequestMessage  extends Equatable  {
   int actionByUser;
   String objectType;
   int objectId;
-  int request;
+  int filtered_request;
   int referenceMessage;
   int replyMessage;
   ObjectData objectData;
@@ -117,7 +117,7 @@ class RequestMessage  extends Equatable  {
         this.actionByUser,
         this.objectType,
         this.objectId,
-        this.request,
+        this.filtered_request,
         this.referenceMessage,
         this.replyMessage,
         this.objectData,
@@ -147,7 +147,7 @@ class RequestMessage  extends Equatable  {
     actionByUser = json['action_by_user'];
     objectType = json['object_type'];
     objectId = json['object_id'];
-    request = json['request'];
+    filtered_request = json['filtered_request'];
     referenceMessage = json['reference_message'];
     replyMessage = json['reply_message'];
     objectData = json['object_data'] != null
@@ -189,7 +189,7 @@ class RequestMessage  extends Equatable  {
     data['action_by_user'] = this.actionByUser;
     data['object_type'] = this.objectType;
     data['object_id'] = this.objectId;
-    data['request'] = this.request;
+    data['filtered_request'] = this.filtered_request;
     data['reference_message'] = this.referenceMessage;
     data['reply_message'] = this.replyMessage;
     if (this.objectData != null) {

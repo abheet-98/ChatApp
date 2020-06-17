@@ -1,4 +1,4 @@
-import 'package:flutter_chat_ui_starter/models/user_model.dart';
+import 'package:flutter_todos/models/user_model.dart';
 import 'package:equatable/equatable.dart';
 
 class Message extends Equatable {

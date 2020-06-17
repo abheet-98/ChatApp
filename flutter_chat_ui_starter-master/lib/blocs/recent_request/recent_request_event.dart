@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_chat_ui_starter/models/models.dart';
+import 'package:flutter_todos/models/models.dart';
 
 import '../../models/user_model.dart';
 
@@ -20,7 +20,7 @@ class RecentRequestLoadedEvent extends RecentRequestEvent {
   List<Object> get props => [user];
 
   @override
-  String toString() => 'RecentRequestLoaded { request: ${user.name} }';
+  String toString() => 'RecentRequestLoaded { filtered_request: ${user.name} }';
 
 }
 
@@ -34,6 +34,6 @@ class MessageShowEvent extends RecentRequestEvent {
   List<Object> get props => [user];
 
   @override
-  String toString() => 'RecentRequestLoaded { request: ${user.name} }';
+  String toString() => 'RecentRequestLoaded { filtered_request: ${user.name} }';
 
 }

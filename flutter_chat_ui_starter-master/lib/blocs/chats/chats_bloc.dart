@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:flutter_chat_ui_starter/blocs/chats/chats.dart';
+import 'package:flutter_todos/blocs/chats/chats.dart';
 
 class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
 

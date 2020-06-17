@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_chat_ui_starter/models/models.dart';
+import 'package:flutter_todos/models/models.dart';
 
 import '../../models/user_model.dart';
 

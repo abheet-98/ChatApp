@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:flutter_chat_ui_starter/blocs/recent_request/recent_request.dart';
+import 'package:flutter_todos/blocs/recent_request/recent_request.dart';
 
 class RecentRequestBloc extends Bloc<RecentRequestEvent, RecentRequestState> {
 
