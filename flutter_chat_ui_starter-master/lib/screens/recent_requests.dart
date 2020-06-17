@@ -30,12 +30,12 @@ class _RecentRequestsPageState extends State<RecentRequestsPage> {
               final Message chat = chats[index];
 
               return GestureDetector(
-                onTap: ()=> Navigator.push(
+                /* onTap: ()=> Navigator.push(
                   context, 
                   MaterialPageRoute(
                     builder: (_) => RequestMessagePage(user:chat.sender),
                   ),
-                ),
+                ), */
                 child: Container(
                   margin: EdgeInsets.only(top:5.0,bottom:5.0,right:10.0,left: 5.0),
                   padding: EdgeInsets.symmetric(horizontal:1.0,vertical:5.0),

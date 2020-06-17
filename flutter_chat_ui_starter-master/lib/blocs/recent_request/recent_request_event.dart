@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_todos/models/models.dart';
 
-import '../../models/user_model.dart';
+import '../../models/user.dart';
 
 abstract class RecentRequestEvent extends Equatable {
   const RecentRequestEvent();

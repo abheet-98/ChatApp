@@ -26,7 +26,9 @@ class TodoEntity {
           complete == other.complete &&
           task == other.task &&
           note == other.note &&
-          id == other.id;
+          id == other.id &&
+          name == other.name &&
+          imageUrl == other.imageUrl;
 
   Map<String, Object> toJson() {
     return {
@@ -34,12 +36,14 @@ class TodoEntity {
       'task': task,
       'note': note,
       'id': id,
+      'name':name,
+      'imageUrl':imageUrl, 
     };
   }
 
   @override
   String toString() {
-    return 'TodoEntity{complete: $complete, task: $task, note: $note, id: $id}';
+    return 'TodoEntity{complete: $complete, task: $task, note: $note, id: $id, name: $name, imageUrl: $imageUrl,}';
   }
 
   static TodoEntity fromJson(Map<String, Object> json) {

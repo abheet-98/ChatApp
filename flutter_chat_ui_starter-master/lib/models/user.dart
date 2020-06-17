@@ -22,25 +22,27 @@ class User extends Equatable {
         this.id = id ?? Uuid().generateV4();
   
   
-  User copyWith({bool complete, String id, String note, String task}) {
+  User copyWith({bool complete, String id, String note, String task,String name,String imageUrl}) {
     return User(
       task ?? this.task,
       complete: complete ?? this.complete,
       id: id ?? this.id,
       note: note ?? this.note,
+      name: name ?? this.name,
+      imageUrl: imageUrl ?? this.imageUrl,
     );
   }
 
   @override
-  List<Object> get props => [complete, id, note, task];
+  List<Object> get props => [complete, id, note, task, name, imageUrl];
 
   @override
   String toString() {
-    return 'Todo { complete: $complete, task: $task, note: $note, id: $id }';
+    return 'Todo { complete: $complete, task: $task, note: $note, id: $id, name: $name, imageUrl: $imageUrl, }';
   }
 
   TodoEntity toEntity() {
-    return TodoEntity(task, id, note, complete);
+    return TodoEntity(task, id, note, complete,name,imageUrl);
   }
 
   static User fromEntity(TodoEntity entity) {
@@ -49,6 +51,8 @@ class User extends Equatable {
       complete: entity.complete ?? false,
       note: entity.note,
       id: entity.id ?? Uuid().generateV4(),
+      name: entity.name,
+      imageUrl: entity.imageUrl
     );
   }
 }

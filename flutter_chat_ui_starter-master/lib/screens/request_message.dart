@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todos/models/message_model.dart';
-import 'package:flutter_todos/models/user_model.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_todos/blocs/blocs.dart';
 
 import '../models/message_model.dart';
-import '../models/user_model.dart';
+import '../models/user.dart';
 
 import 'loading_indicator.dart';
 
