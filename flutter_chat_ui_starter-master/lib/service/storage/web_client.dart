@@ -19,10 +19,11 @@ import 'package:path_provider/path_provider.dart';
 /// a real server but simply emulates the functionality.
 class WebClient {
   final Duration delay;
-  Future<Directory> getDirectory = FileStorage(
-              '__flutter_bloc_app__',
-              getApplicationDocumentsDirectory,
-            );
+  final Future<Directory> Function() getDirectory = getApplicationDocumentsDirectory;
+//  Future<Directory> getDirectory = FileStorage(
+//              '__flutter_bloc_app__',
+//              getApplicationDocumentsDirectory,
+//            );
 
   const WebClient([this.delay = const Duration(milliseconds: 3000)]);
 
@@ -32,6 +33,7 @@ class WebClient {
     debugPrint('load fetchRequests request: ${request}');
     final file = await _getLocalFile();
     final string = await file.readAsString();
+
     final json = JsonDecoder().convert(string);
     debugPrint('fetchRequests file: ${file}, json: json');
     final requestList = (json['result'])
@@ -52,9 +54,9 @@ class WebClient {
   Future<File> _getLocalFile() async {
     final dir = await getDirectory();
     debugPrint('load dir: ${dir}');
-    debugPrint('load dir: ${dir.path}/request.json}');
+    debugPrint('load dir: ${dir.path}/service/storage/request.json}');
 
-    return File('${dir.path}/request.json');
+    return File('${dir.path}/service/storage/request.json');
 //    return File('${dir.path}/ArchSampleStorage__$tag.json');
   }
 }
