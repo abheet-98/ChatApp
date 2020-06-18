@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_todos/core/todos_app_core.dart';
 import 'package:flutter_todos/blocs/blocs.dart';
-import 'package:flutter_todos/widgets/user_tile.dart';
+import 'package:flutter_todos/widgets/request_tile.dart';
 import 'package:flutter_todos/widgets/widgets.dart';
 import 'package:flutter_todos/screens/screens.dart';
 import 'package:flutter_todos/flutter_todos_keys.dart';
@@ -16,48 +16,36 @@ class RequestPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final localizations = ArchSampleLocalizations.of(context);
 
-    return BlocBuilder<RequestBloc, RequestState>(
+    return BlocConsumer<TodosBloc, TodosState>(
+      listener: (context, state) {
+//        if(state is )
+      },
       builder: (context, state) {
-        if (state is FilteredTodosLoadInProgress) {
+        if (state is TodosLoadInProgress) {
           return LoadingIndicator(key: ArchSampleKeys.todosLoading);
-        } else if (state is FilteredTodosLoadSuccess) {
-          final users = state.filteredTodos;
+        } else if (state is TodosLoadSuccess) {
+          final requests = state.requests;
           return ListView.builder(
             key: ArchSampleKeys.todoList,
-            itemCount: users.length,
+            itemCount: requests.length,
             itemBuilder: (BuildContext context, int index) {
-              final user = users[index];
-              return UserTille(
-                user: user,
+              final request = requests[index];
+              return RequestTile(
+                request: request,
                 onDismissed: (direction) {
-                  BlocProvider.of<TodosBloc>(context).add(TodoDeleted(user));
-                  Scaffold.of(context).showSnackBar(DeleteTodoSnackBar(
-                    key: ArchSampleKeys.snackbar,
-                    todo: user,
-                    onUndo: () => BlocProvider.of<TodosBloc>(context)
-                        .add(TodoAdded(user)),
-                    localizations: localizations,
-                  ));
+
                 },
                 onTap: () async {
                   final removedTodo = await Navigator.of(context).push(
                     MaterialPageRoute(builder: (_) {
-                      return DetailsScreen(id: user.id);
+//                      return DetailsScreen(id: request.id);
                     }),
                   );
-                  if (removedTodo != null) {
-                    Scaffold.of(context).showSnackBar(DeleteTodoSnackBar(
-                      key: ArchSampleKeys.snackbar,
-                      todo: user,
-                      onUndo: () => BlocProvider.of<TodosBloc>(context)
-                          .add(TodoAdded(user)),
-                      localizations: localizations,
-                    ));
-                  }
+
                 },
 //                onCheckboxChanged: (_) {
 //                  BlocProvider.of<TodosBloc>(context).add(
-//                    TodoUpdated(user.copyWith(complete: !user.complete)),
+//                    TodoUpdated(request.copyWith(complete: !request.complete)),
 //                  );
 //                },
               );

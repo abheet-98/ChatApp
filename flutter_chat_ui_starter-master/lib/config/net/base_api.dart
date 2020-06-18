@@ -71,7 +71,6 @@ class ApiInterceptor extends InterceptorsWrapper {
 
 class ResponseData extends BaseResponseData {
   bool get success => 200 == code || 201 == code;
-
   ResponseData.fromJson(Map<String, dynamic> json) {
     code = json['status'];
     error = json.containsKey('message') ? json['message'] : json["error"];

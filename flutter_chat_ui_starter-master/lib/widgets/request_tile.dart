@@ -1,26 +1,27 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_todos/models/request.dart';
 import 'package:flutter_todos/core/todos_app_core.dart';
 import 'package:flutter_todos/models/models.dart';
 
-class UserTille extends StatelessWidget {
+class RequestTile extends StatelessWidget {
   final DismissDirectionCallback onDismissed;
   final GestureTapCallback onTap;
   final ValueChanged<bool> onCheckboxChanged;
-  final User user;
+  final Request request;
 
-  UserTille({
+  RequestTile({
     Key key,
     @required this.onDismissed,
     @required this.onTap,
     @required this.onCheckboxChanged,
-    @required this.user,
+    @required this.request,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Dismissible(
-      key: ArchSampleKeys.todoItem(user.id),
+      key: Key(request.id.toString()),
       onDismissed: onDismissed,
       child: GestureDetector(
         onTap: onTap,
@@ -35,7 +36,7 @@ class UserTille extends StatelessWidget {
                 children: <Widget>[
                   CircleAvatar(
                     radius: 35.0,
-                    backgroundImage: AssetImage(user.imageUrl),
+                    backgroundImage: AssetImage(request.url),
                   ),
                   SizedBox(
                     width: 10.0,
@@ -44,7 +45,7 @@ class UserTille extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        user.name,
+                        request.name,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
@@ -53,7 +54,7 @@ class UserTille extends StatelessWidget {
                       Container(
                         width: MediaQuery.of(context).size.width * 0.60,
                         child: Text(
-                          user.task,
+                          request.task,
                           style: TextStyle(fontSize: 15.0),
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -64,7 +65,7 @@ class UserTille extends StatelessWidget {
               ),
               /* Column(
             children: <Widget>[
-              Text(user.),
+              Text(request.),
               SizedBox(
                 height: 5.0,
               ),

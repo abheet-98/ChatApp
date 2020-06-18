@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_todos/storage/todos_repository_simple.dart';
+import 'package:flutter_todos/widgets/request_page.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_todos/core/todos_app_core.dart';
@@ -15,19 +16,20 @@ void main() {
   // This will allow us to handle all transitions and errors in SimpleBlocDelegate.
   BlocSupervisor.delegate = SimpleBlocDelegate();
   runApp(
-    BlocProvider(
-      create: (context) {
-        return TodosBloc(
-          todosRepository: const TodosRepositoryFlutter(
-            fileStorage: const FileStorage(
-              '__flutter_bloc_app__',
-              getApplicationDocumentsDirectory,
-            ),
-          ),
-        )..add(TodosLoaded());
-      },
-      child: TodosApp(),
-    ),
+      TodosApp()
+//    BlocProvider(
+//      create: (context) {
+//        return TodosBloc(
+//          todosRepository: const TodosRepositoryFlutter(
+//            fileStorage: const FileStorage(
+//              '__flutter_bloc_app__',
+//              getApplicationDocumentsDirectory,
+//            ),
+//          ),
+//        )..add(TodosLoaded());
+//      },
+//      child: TodosApp(),
+//    ),
   );
 }
 
@@ -45,34 +47,35 @@ class TodosApp extends StatelessWidget {
         ArchSampleRoutes.home: (context) {
           return MultiBlocProvider(
             providers: [
-              BlocProvider<TabBloc>(
-                create: (context) => TabBloc(),
+              BlocProvider<TodosBloc>(
+                create: (context) => TodosBloc()..add(TodosLoaded(null)),
               ),
-              BlocProvider<RequestBloc>(
-                create: (context) => RequestBloc(
-                  todosBloc: BlocProvider.of<TodosBloc>(context),
-                ),
-              ),
-              BlocProvider<StatsBloc>(
-                create: (context) => StatsBloc(
-                  todosBloc: BlocProvider.of<TodosBloc>(context),
-                ),
-              ),
+
             ],
-            child: HomeScreen(),
+            child: Scaffold(
+              appBar: AppBar(
+                title: Text(FlutterBlocLocalizations.of(context).appTitle),
+
+              ),
+//          body: activeTab == AppTab.todos ? FilteredTodos() : Stats(),
+              body: RequestPage(),
+              floatingActionButton: FloatingActionButton(
+                key: ArchSampleKeys.addTodoFab,
+                onPressed: () {
+                  Navigator.pushNamed(context, ArchSampleRoutes.addTodo);
+                },
+                child: Icon(Icons.add),
+                tooltip: ArchSampleLocalizations.of(context).addTodo,
+              ),
+//          bottomNavigationBar: TabSelector(
+//            activeTab: activeTab,
+//            onTabSelected: (tab) =>
+//                BlocProvider.of<TabBloc>(context).add(TabUpdated(tab)),
+//          ),
+            ),
           );
         },
-        ArchSampleRoutes.addTodo: (context) {
-          return AddEditScreen(
-            key: ArchSampleKeys.addTodoScreen,
-            onSave: (task, note) {
-              BlocProvider.of<TodosBloc>(context).add(
-                TodoAdded(User(task, note: note)),
-              );
-            },
-            isEditing: false,
-          );
-        },
+
       },
     );
   }

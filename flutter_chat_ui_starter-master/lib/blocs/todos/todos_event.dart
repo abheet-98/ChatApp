@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_todos/models/models.dart';
+import 'package:flutter_todos/models/request.dart';
+//import 'package:flutter_todos/models/models.dart';
 
 abstract class TodosEvent extends Equatable {
   const TodosEvent();
@@ -8,7 +9,17 @@ abstract class TodosEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class TodosLoaded extends TodosEvent {}
+class TodosLoaded extends TodosEvent {
+  final Request request;
+
+  const TodosLoaded(this.request);
+
+  @override
+  List<Object> get props => [request];
+
+  @override
+  String toString() => 'TodosLoaded { request: $request }';
+}
 
 class TodoAdded extends TodosEvent {
   final User todo;
