@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_todos/core/todos_app_core.dart';
-import 'package:flutter_todos/blocs/blocs.dart';
-import 'package:flutter_todos/widgets/request_tile.dart';
-import 'package:flutter_todos/widgets/widgets.dart';
-import 'package:flutter_todos/screens/screens.dart';
-import 'package:flutter_todos/flutter_todos_keys.dart';
+import 'package:bethere_app/core/todos_app_core.dart';
+import 'package:bethere_app/blocs/blocs.dart';
+import 'package:bethere_app/widgets/request_tile.dart';
+import 'package:bethere_app/widgets/widgets.dart';
+import 'package:bethere_app/screens/screens.dart';
+import '../app_keys.dart';
 
 class RequestPage extends StatelessWidget {
   RequestPage({Key key}) : super(key: key);
@@ -16,14 +16,14 @@ class RequestPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final localizations = ArchSampleLocalizations.of(context);
 
-    return BlocConsumer<TodosBloc, TodosState>(
+    return BlocConsumer<RequestBloc, RequestState>(
       listener: (context, state) {
 //        if(state is )
       },
       builder: (context, state) {
-        if (state is TodosLoadInProgress) {
+        if (state is RequestLoadInProgress) {
           return LoadingIndicator(key: ArchSampleKeys.todosLoading);
-        } else if (state is TodosLoadSuccess) {
+        } else if (state is RequestLoadSuccess) {
           final requests = state.requests;
           return ListView.builder(
             key: ArchSampleKeys.todoList,
@@ -44,7 +44,7 @@ class RequestPage extends StatelessWidget {
 
                 },
 //                onCheckboxChanged: (_) {
-//                  BlocProvider.of<TodosBloc>(context).add(
+//                  BlocProvider.of<RequestBloc>(context).add(
 //                    TodoUpdated(request.copyWith(complete: !request.complete)),
 //                  );
 //                },
@@ -52,7 +52,7 @@ class RequestPage extends StatelessWidget {
             },
           );
         } else {
-          return Container(key: FlutterTodosKeys.filteredTodosEmptyContainer);
+          return Container(key: AppKeys.filteredRequestEmptyContainer);
         }
       },
     );

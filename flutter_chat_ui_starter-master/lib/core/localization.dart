@@ -26,7 +26,7 @@ class ArchSampleLocalizations {
   }
 
   String get todos => Intl.message(
-        'Todos',
+        'Request',
         name: 'todos',
         args: [],
         locale: locale.toString(),
@@ -109,9 +109,9 @@ class ArchSampleLocalizations {
         locale: locale.toString(),
       );
 
-  String get filterTodos => Intl.message(
-        'Filter Todos',
-        name: 'filterTodos',
+  String get filterRequest => Intl.message(
+        'Filter Request',
+        name: 'filterRequest',
         args: [],
         locale: locale.toString(),
       );
@@ -144,16 +144,16 @@ class ArchSampleLocalizations {
         locale: locale.toString(),
       );
 
-  String get completedTodos => Intl.message(
-        'Completed Todos',
-        name: 'completedTodos',
+  String get completedRequest => Intl.message(
+        'Completed Request',
+        name: 'completedRequest',
         args: [],
         locale: locale.toString(),
       );
 
-  String get activeTodos => Intl.message(
-        'Active Todos',
-        name: 'activeTodos',
+  String get activeRequest => Intl.message(
+        'Active Request',
+        name: 'activeRequest',
         args: [],
         locale: locale.toString(),
       );

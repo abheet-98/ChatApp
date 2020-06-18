@@ -1,27 +1,27 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_todos/models/request.dart';
-//import 'package:flutter_todos/models/models.dart';
+import 'package:bethere_app/models/request.dart';
+//import 'package:bethere_app/models/models.dart';
 
-abstract class TodosEvent extends Equatable {
-  const TodosEvent();
+abstract class RequestEvent extends Equatable {
+  const RequestEvent();
 
   @override
   List<Object> get props => [];
 }
 
-class TodosLoaded extends TodosEvent {
+class RequestLoaded extends RequestEvent {
   final Request request;
 
-  const TodosLoaded(this.request);
+  const RequestLoaded(this.request);
 
   @override
   List<Object> get props => [request];
 
   @override
-  String toString() => 'TodosLoaded { request: $request }';
+  String toString() => 'RequestLoaded { request: $request }';
 }
 
-class TodoAdded extends TodosEvent {
+class TodoAdded extends RequestEvent {
   final User todo;
 
   const TodoAdded(this.todo);
@@ -33,7 +33,7 @@ class TodoAdded extends TodosEvent {
   String toString() => 'TodoAdded { todo: $todo }';
 }
 
-class TodoUpdated extends TodosEvent {
+class TodoUpdated extends RequestEvent {
   final User todo;
 
   const TodoUpdated(this.todo);
@@ -45,7 +45,7 @@ class TodoUpdated extends TodosEvent {
   String toString() => 'TodoUpdated { updatedTodo: $todo }';
 }
 
-class TodoDeleted extends TodosEvent {
+class TodoDeleted extends RequestEvent {
   final User todo;
 
   const TodoDeleted(this.todo);
@@ -57,6 +57,6 @@ class TodoDeleted extends TodosEvent {
   String toString() => 'TodoDeleted { todo: $todo }';
 }
 
-class ClearCompleted extends TodosEvent {}
+class ClearCompleted extends RequestEvent {}
 
-class ToggleAll extends TodosEvent {}
+class ToggleAll extends RequestEvent {}

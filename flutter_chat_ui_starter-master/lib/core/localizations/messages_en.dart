@@ -28,13 +28,13 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
 
   static Map<String, dynamic> _notInlinedMessages(_) => {
-        'activeTodos': MessageLookupByLibrary.simpleMessage('Active Todos'),
+        'activeRequest': MessageLookupByLibrary.simpleMessage('Active Request'),
         'addTodo': MessageLookupByLibrary.simpleMessage('Add Todo'),
         'cancel': MessageLookupByLibrary.simpleMessage('Cancel'),
         'clearCompleted':
             MessageLookupByLibrary.simpleMessage('Clear completed'),
-        'completedTodos':
-            MessageLookupByLibrary.simpleMessage('Completed Todos'),
+        'completedRequest':
+            MessageLookupByLibrary.simpleMessage('Completed Request'),
         'delete': MessageLookupByLibrary.simpleMessage('Delete'),
         'deleteTodo': MessageLookupByLibrary.simpleMessage('Delete Todo'),
         'deleteTodoConfirmation':
@@ -42,7 +42,7 @@ class MessageLookup extends MessageLookupByLibrary {
         'editTodo': MessageLookupByLibrary.simpleMessage('Edit Todo'),
         'emptyTodoError':
             MessageLookupByLibrary.simpleMessage('Please enter some text'),
-        'filterTodos': MessageLookupByLibrary.simpleMessage('Filter Todos'),
+        'filterRequest': MessageLookupByLibrary.simpleMessage('Filter Request'),
         'markAllComplete':
             MessageLookupByLibrary.simpleMessage('Mark all complete'),
         'markAllIncomplete':
@@ -58,7 +58,7 @@ class MessageLookup extends MessageLookupByLibrary {
         'stats': MessageLookupByLibrary.simpleMessage('Stats'),
         'todoDeleted': m0,
         'todoDetails': MessageLookupByLibrary.simpleMessage('Todo Details'),
-        'todos': MessageLookupByLibrary.simpleMessage('Todos'),
+        'todos': MessageLookupByLibrary.simpleMessage('Request'),
         'undo': MessageLookupByLibrary.simpleMessage('Undo')
       };
 }

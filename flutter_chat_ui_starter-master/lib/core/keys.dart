@@ -11,7 +11,7 @@ class ArchSampleKeys {
   static const snackbar = Key('__snackbar__');
   static Key snackbarAction(String id) => Key('__snackbar_action_${id}__');
 
-  // Todos
+  // Request
   static const todoList = Key('__todoList__');
   static const todosLoading = Key('__todosLoading__');
   static final todoItem = (String id) => Key('TodoItem__${id}');

@@ -1,9 +1,9 @@
 import 'dart:async';
 //import 'dart:html';
-import 'package:flutter_todos/service/provider/user_api_provider.dart';
-import 'package:flutter_todos/models/models.dart';
+import 'package:bethere_app/service/provider/user_api_provider.dart';
+import 'package:bethere_app/models/models.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_todos/config/storage_manager.dart';
+import 'package:bethere_app/config/storage_manager.dart';
 
 //import '../models/trailer_model.dart';
 

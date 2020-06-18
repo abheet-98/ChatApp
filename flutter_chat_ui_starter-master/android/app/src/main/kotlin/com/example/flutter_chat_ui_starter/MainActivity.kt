@@ -1,4 +1,4 @@
-package com.example.flutter_todos
+package com.example.bethere_app
 
 import android.os.Bundle
 import io.flutter.app.FlutterActivity

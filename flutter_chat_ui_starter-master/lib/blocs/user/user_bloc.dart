@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter_todos/models/models.dart';
-import 'package:flutter_todos/service/repository/user_repository.dart';
+import 'package:bethere_app/models/models.dart';
+import 'package:bethere_app/service/repository/user_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';

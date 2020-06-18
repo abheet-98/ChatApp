@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:dio/native_imp.dart';
 import 'package:flutter/foundation.dart';
 import 'package:dio/dio.dart';
-// import 'package:flutter_todos/utils/platform_utils.dart';
+// import 'package:bethere_app/utils/platform_utils.dart';
 
 // Must be the top function
 _parseAndDecode(String response) {

@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_todos/models/request.dart';
-import 'package:flutter_todos/core/todos_app_core.dart';
-import 'package:flutter_todos/models/models.dart';
+import 'package:bethere_app/models/request.dart';
+import 'package:bethere_app/core/todos_app_core.dart';
+import 'package:bethere_app/models/models.dart';
 
 class RequestTile extends StatelessWidget {
   final DismissDirectionCallback onDismissed;
@@ -34,10 +34,10 @@ class RequestTile extends StatelessWidget {
             children: <Widget>[
               Row(
                 children: <Widget>[
-                  CircleAvatar(
-                    radius: 35.0,
-                    backgroundImage: AssetImage(request.url),
-                  ),
+//                  CircleAvatar(
+//                    radius: 35.0,
+//                    backgroundImage: AssetImage(request.url),
+//                  ),
                   SizedBox(
                     width: 10.0,
                   ),
@@ -45,7 +45,7 @@ class RequestTile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        request.name,
+                        request.title,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
@@ -54,7 +54,7 @@ class RequestTile extends StatelessWidget {
                       Container(
                         width: MediaQuery.of(context).size.width * 0.60,
                         child: Text(
-                          request.task,
+                          request.title,
                           style: TextStyle(fontSize: 15.0),
                           overflow: TextOverflow.ellipsis,
                         ),
