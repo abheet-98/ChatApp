@@ -41,7 +41,7 @@ class RequestPage extends StatelessWidget {
                 onTap: () async {
                   final removedTodo = await Navigator.of(context).push(
                     MaterialPageRoute(builder: (_) {
-                      return DetailsScreen(id: user.id);
+                      return DetailsScreen(user: user);
                     }),
                   );
                   if (removedTodo != null) {

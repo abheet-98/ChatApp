@@ -41,8 +41,12 @@ dev_dependencies:
 #      ref: rxdart/0.23.0
 
 flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
   uses-material-design: true
 
-
-assets:
+  # To add assets to your application, add an assets section, like this:
+  assets:
    - assets/images/

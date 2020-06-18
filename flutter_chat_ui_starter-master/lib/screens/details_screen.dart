@@ -5,16 +5,18 @@ import 'package:flutter_todos/core/todos_app_core.dart';
 import 'package:flutter_todos/blocs/todos/todos.dart';
 import 'package:flutter_todos/screens/screens.dart';
 import 'package:flutter_todos/flutter_todos_keys.dart';
-
+import '../widgets/request_message.dart';
+import '../models/user.dart';
 class DetailsScreen extends StatelessWidget {
-  final String id;
+  final User user;
 
-  DetailsScreen({Key key, @required this.id})
+  DetailsScreen({Key key, @required this.user})
       : super(key: key ?? ArchSampleKeys.todoDetailsScreen);
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TodosBloc, TodosState>(
+    return RequestMessagePage(user:this.user);
+    /* BlocBuilder<TodosBloc, TodosState>(
       builder: (context, state) {
         final todo = (state as TodosLoadSuccess)
             .todos
@@ -119,6 +121,6 @@ class DetailsScreen extends StatelessWidget {
           ),
         );
       },
-    );
-  }
+    ); */
+  } 
 }

@@ -28,7 +28,7 @@ class WebClient {
                 'With the chickeny bits!',
                 false,
                 'Rahul',
-                'assets/grep.jpg'
+                'assets/images/grep.jpg'
               ),
               TodoEntity(
                 'Find a Red Sea dive trip',
@@ -36,7 +36,7 @@ class WebClient {
                 'Echo vs MY Dream',
                 false,
                   'Neeraj',
-                  'assets/grep.jpg'
+                  'assets/images/grep.jpg'
               ),
               TodoEntity(
                 'Book flights to Egypt',
@@ -44,7 +44,7 @@ class WebClient {
                 '',
                 true,
                   'Sahil',
-                  'assets/grep.jpg'
+                  'assets/images/grep.jpg'
               ),
               TodoEntity(
                 'Decide on accommodation',
@@ -52,7 +52,7 @@ class WebClient {
                 '',
                 false,
                   'Dishant',
-                  'assets/grep.jpg'
+                  'assets/images/grep.jpg'
               ),
               TodoEntity(
                 'Sip Margaritas',
@@ -60,7 +60,7 @@ class WebClient {
                 'on the beach',
                 true,
                   'Gaurav',
-                  'assets/grep.jpg'
+                  'assets/images/grep.jpg'
               ),
               TodoEntity(
                 'Sip Margaritas',
@@ -68,7 +68,7 @@ class WebClient {
                 'on the beach',
                 true,
                   'Bharat',
-                  'assets/grep.jpg'
+                  'assets/images/grep.jpg'
               ),
 
 

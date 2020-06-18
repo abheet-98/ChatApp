@@ -13,7 +13,7 @@ class TodoItem extends StatelessWidget {
     Key key,
     @required this.onDismissed,
     @required this.onTap,
-    @required this.onCheckboxChanged,
+    this.onCheckboxChanged,
     @required this.user,
   }) : super(key: key);
 
@@ -24,31 +24,28 @@ class TodoItem extends StatelessWidget {
       onDismissed: onDismissed,
       child: ListTile(
         onTap: onTap,
-        leading: Checkbox(
-          key: ArchSampleKeys.todoItemCheckbox(user.id),
-          value: user.complete,
-          onChanged: onCheckboxChanged,
+        leading: CircleAvatar(
+          radius: 35.0,
+          backgroundImage: AssetImage(user.imageUrl),
         ),
         title: Hero(
           tag: '${user.id}__heroTag',
           child: Container(
             width: MediaQuery.of(context).size.width,
             child: Text(
-              user.task,
+              user.name,
               key: ArchSampleKeys.todoItemTask(user.id),
               style: Theme.of(context).textTheme.headline6,
             ),
           ),
         ),
-        subtitle: user.note.isNotEmpty
-            ? Text(
-                user.note,
-                key: ArchSampleKeys.todoItemNote(user.id),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.subtitle1,
-              )
-            : null,
+        subtitle: Text(
+          user.task,
+          key: ArchSampleKeys.todoItemNote(user.id),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(context).textTheme.subtitle1,
+        ),
       ),
     );
   }
