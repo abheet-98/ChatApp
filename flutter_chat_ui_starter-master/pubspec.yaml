@@ -1,6 +1,8 @@
 name: flutter_todos
 description: A new Flutter project.
 
+version: 1.1.1+1
+
 environment:
   sdk: ">=2.6.0 <3.0.0"
 
@@ -11,8 +13,41 @@ dependencies:
   path_provider: ^1.6.10
   bloc: ^4.0.0
   flutter_bloc: ^4.0.0
-  rxdart: ^0.23.1
+
   key_value_store: ^1.0.0
+
+  shared_preferences: ^0.5.3+5
+  # Local json object storage
+  localstorage: ^3.0.0
+  # State management
+  provider: ^4.0.5
+  # UI
+  oktoast: ^2.1.7
+  pull_to_refresh: ^1.5.6
+  dio: ^3.0.1
+  rxdart: ^0.24.0
+  device_info: ^0.4.0+1
+  package_info: ^0.4.0+6
+  shimmer: ^1.0.0
+  bubble_bottom_bar: ^1.2.0
+  audioplayers: ^0.14.0
+  video_player: ^0.10.9+1
+  connectivity: ^0.4.8+2
+  url_launcher: ^5.4.5
+  validate: ^1.7.0
+
+  flutter_screenutil: ^0.6.0
+  dropdown_formfield: ^0.1.2
+  cached_network_image: ^2.0.0
+  http: ^0.11.3+17
+
+  get_it: ^4.0.2
+  esys_flutter_share: ^1.0.2
+  visibility_detector: ^0.1.5
+  flutter_svg: ^0.17.4
+  cupertino_icons: ^0.1.2
+  flutter_launcher_icons: ^0.7.5
+
   #  flutter_bloc:
   #  path: ../../packages/flutter_bloc
   flutter:
@@ -44,5 +79,5 @@ flutter:
   uses-material-design: true
 
 
-assets:
-   - assets/images/
+  assets:
+     - assets/images/

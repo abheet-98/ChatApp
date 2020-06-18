@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_todos/core/todos_app_core.dart';
 import 'package:flutter_todos/blocs/blocs.dart';
+import 'package:flutter_todos/widgets/user_tile.dart';
 import 'package:flutter_todos/widgets/widgets.dart';
 import 'package:flutter_todos/screens/screens.dart';
 import 'package:flutter_todos/flutter_todos_keys.dart';
@@ -26,7 +27,7 @@ class RequestPage extends StatelessWidget {
             itemCount: users.length,
             itemBuilder: (BuildContext context, int index) {
               final user = users[index];
-              return TodoItem(
+              return UserTille(
                 user: user,
                 onDismissed: (direction) {
                   BlocProvider.of<TodosBloc>(context).add(TodoDeleted(user));

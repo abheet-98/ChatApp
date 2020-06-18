@@ -25,9 +25,10 @@ class TodosRepositoryFlutter implements TodosRepository {
   /// error, it attempts to load the Todos from a Web Client.
   @override
   Future<List<TodoEntity>> loadTodos() async {
-    try {
-      return await fileStorage.loadTodos();
-    } catch (e) {
+//    try {
+//      return await fileStorage.loadTodos();
+//    } catch (e)
+    {
       final todos = await webClient.fetchTodos();
 
       fileStorage.saveTodos(todos);
