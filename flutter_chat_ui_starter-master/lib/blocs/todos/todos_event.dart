@@ -1,51 +1,63 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_todos/models/models.dart';
 
-abstract class TodosEvent extends Equatable {
-  const TodosEvent();
+abstract class RequestEvent extends Equatable {
+  const RequestEvent();
 
   @override
   List<Object> get props => [];
 }
 
-class TodosLoaded extends TodosEvent {}
+class TodosLoaded extends RequestEvent {}
 
-class TodoAdded extends TodosEvent {
-  final User todo;
+class TodoAdded extends RequestEvent {
+  final User user;
 
-  const TodoAdded(this.todo);
-
-  @override
-  List<Object> get props => [todo];
+  const TodoAdded(this.user);
 
   @override
-  String toString() => 'TodoAdded { todo: $todo }';
+  List<Object> get props => [user];
+
+  @override
+  String toString() => 'TodoAdded { user: $user }';
 }
 
-class TodoUpdated extends TodosEvent {
-  final User todo;
+class RequestMessageLoaded extends RequestEvent {
+  final User user;
 
-  const TodoUpdated(this.todo);
-
-  @override
-  List<Object> get props => [todo];
+  const RequestMessageLoaded(this.user);
 
   @override
-  String toString() => 'TodoUpdated { updatedTodo: $todo }';
+  List<Object> get props => [user];
+
+  @override
+  String toString() => 'RequestMessageLoaded { user: $user }';
 }
 
-class TodoDeleted extends TodosEvent {
-  final User todo;
+class TodoUpdated extends RequestEvent {
+  final User user;
 
-  const TodoDeleted(this.todo);
-
-  @override
-  List<Object> get props => [todo];
+  const TodoUpdated(this.user);
 
   @override
-  String toString() => 'TodoDeleted { todo: $todo }';
+  List<Object> get props => [user];
+
+  @override
+  String toString() => 'TodoUpdated { updatedTodo: $user }';
 }
 
-class ClearCompleted extends TodosEvent {}
+class TodoDeleted extends RequestEvent {
+  final User user;
 
-class ToggleAll extends TodosEvent {}
+  const TodoDeleted(this.user);
+
+  @override
+  List<Object> get props => [user];
+
+  @override
+  String toString() => 'TodoDeleted { user: $user }';
+}
+
+class ClearCompleted extends RequestEvent {}
+
+class ToggleAll extends RequestEvent {}

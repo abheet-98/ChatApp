@@ -5,6 +5,7 @@
 import 'dart:async';
 import 'dart:core';
 
+import 'package:flutter_todos/models/message_entity.dart';
 import 'package:meta/meta.dart';
 import 'package:flutter_todos/repository/todos_repository_core.dart';
 import 'file_storage.dart';
@@ -36,6 +37,21 @@ class TodosRepositoryFlutter implements TodosRepository {
       return todos;
     //}
   }
+
+  @override
+  Future<List<MessageEntity>> loadRequestMessage() async {
+    /* try {
+      return await fileStorage.loadTodos();
+    } 
+    catch (e) {*/
+      final todos = await webClient.fetchMessage();
+
+      //fileStorage.saveTodos(todos);
+
+      return todos;
+    //}
+  }
+
 
   // Persists todos to local disk and the web
   @override

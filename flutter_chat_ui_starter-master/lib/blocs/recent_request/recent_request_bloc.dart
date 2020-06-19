@@ -3,15 +3,15 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:flutter_todos/blocs/recent_request/recent_request.dart';
 
-class RecentRequestBloc extends Bloc<RecentRequestEvent, RecentRequestState> {
+class RecentFilteredRequestBloc extends Bloc<RecentFilteredRequestEvent, RecentFilteredRequestState> {
 
-  RecentRequestBloc();
-
-  @override
-  RecentRequestState get initialState => RecentRequestLoadInProgress();
+  RecentFilteredRequestBloc();
 
   @override
-  Stream<RecentRequestState> mapEventToState(RecentRequestEvent event) async* {
+  RecentFilteredRequestState get initialState => RecentRequestLoadInProgress();
+
+  @override
+  Stream<RecentFilteredRequestState> mapEventToState(RecentFilteredRequestEvent event) async* {
     if (event is RecentRequestLoadedEvent) {
       yield* _mapTodosLoadedToState(event);
     }
@@ -21,7 +21,7 @@ class RecentRequestBloc extends Bloc<RecentRequestEvent, RecentRequestState> {
 
   }
 
-  Stream<RecentRequestState> _mapTodosLoadedToState(event) async* {
+  Stream<RecentFilteredRequestState> _mapTodosLoadedToState(event) async* {
     try {
         final user = event.user;
         final respose = user; //api call
@@ -31,7 +31,7 @@ class RecentRequestBloc extends Bloc<RecentRequestEvent, RecentRequestState> {
     }
   }
 
-  Stream<RecentRequestState> _mapMessageShowToState(event) async* {
+  Stream<RecentFilteredRequestState> _mapMessageShowToState(event) async* {
     try {
         final user = event.user;
         final respose = user; //api call

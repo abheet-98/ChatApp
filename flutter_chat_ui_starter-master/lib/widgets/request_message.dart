@@ -5,7 +5,12 @@ import 'package:flutter_todos/core/todos_app_core.dart';
 import 'package:flutter_todos/blocs/todos/todos.dart';
 import 'package:flutter_todos/screens/screens.dart';
 import 'package:flutter_todos/flutter_todos_keys.dart';
+import 'package:flutter_todos/widgets/delete_todo_snack_bar.dart';
+import 'package:flutter_todos/widgets/message_tile.dart';
 import '../models/user.dart';
+import 'package:flutter_todos/widgets/user_tile.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_todos/widgets/loading_indicator.dart';
 
 class RequestMessagePage extends StatelessWidget {
   final User user;
@@ -15,13 +20,8 @@ class RequestMessagePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TodosBloc, TodosState>(
-      builder: (context, state) {
-        final todo = (state as TodosLoadSuccess)
-            .todos
-            .firstWhere((todo) => todo.id == user.id, orElse: () => null);
-        final localizations = ArchSampleLocalizations.of(context);
-        return Scaffold(
+    final localizations = ArchSampleLocalizations.of(context);
+    return Scaffold(
           appBar: AppBar(
             title: Text(this.user.name),
             /* actions: [
@@ -30,15 +30,113 @@ class RequestMessagePage extends StatelessWidget {
                 key: ArchSampleKeys.deleteTodoButton,
                 icon: Icon(Icons.delete),
                 onPressed: () {
-                  BlocProvider.of<TodosBloc>(context).add(TodoDeleted(todo));
+                  BlocProvider.of<RequestBloc>(context).add(TodoDeleted(todo));
                   Navigator.pop(context, todo);
                 },
               )
             ], */
           ),
-          body: todo == null
-              ? Container(key: FlutterTodosKeys.emptyDetailsContainer)
-              : GestureDetector(
+
+    /* final todo = (state as TodosLoadSuccess)
+            .todos
+            .firstWhere((todo) => todo.id == user.id, orElse: () => null); */    
+
+            body: /* todo == null
+              ? Container(key: FlutterTodosKeys.emptyDetailsContainer) */
+             
+    
+     BlocBuilder<RequestBloc, RequestState>(
+      builder: (context, state) {
+        if (state is TodosLoadInProgress) {
+          return LoadingIndicator(key: ArchSampleKeys.todosLoading);
+        } else if (state is RequestMessageLoad) {
+          final users = state.messageEntity;
+          return ListView.builder(
+            key: ArchSampleKeys.todoList,
+            itemCount: users.length,
+            itemBuilder: (BuildContext context, int index) {
+              final user = users[index];
+              return MessageTile(
+                user: user,
+                /* onDismissed: (direction) {
+                  BlocProvider.of<RequestBloc>(context).add(TodoDeleted(user));
+                  Scaffold.of(context).showSnackBar(DeleteTodoSnackBar(
+                    key: ArchSampleKeys.snackbar,
+                    todo: user,
+                    onUndo: () => BlocProvider.of<RequestBloc>(context)
+                        .add(TodoAdded(user)),
+                    localizations: localizations,
+                  ));
+                }, */
+                onTap: () async {
+                  
+                },
+//                onCheckboxChanged: (_) {
+//                  BlocProvider.of<RequestBloc>(context).add(
+//                    TodoUpdated(user.copyWith(complete: !user.complete)),
+//                  );
+//                },
+              );
+            },
+          );
+        } else {
+          return Container(key: FlutterTodosKeys.filteredTodosEmptyContainer);
+        }
+
+    
+
+
+        
+        
+        
+        
+          
+              /* ListView.builder(
+            key: ArchSampleKeys.todoList,
+            itemCount: users.length,
+            itemBuilder: (BuildContext context, int index) {
+              final user = users[index];
+              return MessageTile(
+                user: user,
+                onDismissed: (direction) {
+                  BlocProvider.of<RequestBloc>(context).add(TodoDeleted(user));
+                  Scaffold.of(context).showSnackBar(DeleteTodoSnackBar(
+                    key: ArchSampleKeys.snackbar,
+                    todo: user,
+                    onUndo: () => BlocProvider.of<RequestBloc>(context)
+                        .add(TodoAdded(user)),
+                    localizations: localizations,
+                  ));
+                },
+                onTap: () async {
+                  final removedTodo = await Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) {
+                      return DetailsScreen(user: user);
+                    }),
+                  );
+                  if (removedTodo != null) {
+                    Scaffold.of(context).showSnackBar(DeleteTodoSnackBar(
+                      key: ArchSampleKeys.snackbar,
+                      todo: user,
+                      onUndo: () => BlocProvider.of<RequestBloc>(context)
+                          .add(TodoAdded(user)),
+                      localizations: localizations,
+                    ));
+                  }
+                },
+//                onCheckboxChanged: (_) {
+//                  BlocProvider.of<RequestBloc>(context).add(
+//                    TodoUpdated(user.copyWith(complete: !user.complete)),
+//                  );
+//                },
+              );
+            },
+          ), */
+              
+              
+              
+              
+              /* GestureDetector(
                   onTap: () => FocusScope.of(context).unfocus(),
                   child: Column(
                     children: <Widget>[
@@ -181,7 +279,7 @@ class RequestMessagePage extends StatelessWidget {
                       )
                     ],
                   ),
-                ),
+                ), */
 
           /* appBar: AppBar(
             title: Text(localizations.todoDetails),
@@ -191,7 +289,7 @@ class RequestMessagePage extends StatelessWidget {
                 key: ArchSampleKeys.deleteTodoButton,
                 icon: Icon(Icons.delete),
                 onPressed: () {
-                  BlocProvider.of<TodosBloc>(context).add(TodoDeleted(todo));
+                  BlocProvider.of<RequestBloc>(context).add(TodoDeleted(todo));
                   Navigator.pop(context, todo);
                 },
               )
@@ -211,9 +309,9 @@ class RequestMessagePage extends StatelessWidget {
                                 key: FlutterTodosKeys.detailsScreenCheckBox,
                                 value: todo.complete,
                                 onChanged: (_) {
-                                  BlocProvider.of<TodosBloc>(context).add(
+                                  BlocProvider.of<RequestBloc>(context).add(
                                     TodoUpdated(
-                                      todo.copyWith(complete: !todo.complete),
+                                      todo.copyWith(complete: !todo.complete), 
                                     ),
                                   );
                                 }),
@@ -264,7 +362,7 @@ class RequestMessagePage extends StatelessWidget {
                           return AddEditScreen(
                             key: ArchSampleKeys.editTodoScreen,
                             onSave: (task, note) {
-                              BlocProvider.of<TodosBloc>(context).add(
+                              BlocProvider.of<RequestBloc>(context).add(
                                 TodoUpdated(
                                   todo.copyWith(task: task, note: note),
                                 ),
@@ -278,8 +376,9 @@ class RequestMessagePage extends StatelessWidget {
                     );
                   },
           ), */
-        );
+        
       },
+    ),
     );
   }
 }

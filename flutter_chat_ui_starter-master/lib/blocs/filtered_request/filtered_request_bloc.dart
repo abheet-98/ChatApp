@@ -1,15 +1,18 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:flutter_todos/models/message_entity.dart';
+import 'package:flutter_todos/storage/repository.dart';
 import 'package:meta/meta.dart';
 import 'package:flutter_todos/blocs/filtered_request/filtered_request.dart';
 import 'package:flutter_todos/blocs/todos/todos.dart';
 import 'package:flutter_todos/models/models.dart';
 
-class RequestBloc extends Bloc<RequestEvent, RequestState> {
-  final TodosBloc todosBloc;
+class FilteredRequestBloc extends Bloc<FilteredRequestEvent, FilteredRequestState> {
+  final RequestBloc todosBloc;
   StreamSubscription todosSubscription;
+  TodosRepositoryFlutter todosRepository = TodosRepositoryFlutter();
 
-  RequestBloc({@required this.todosBloc}) {
+  FilteredRequestBloc({@required this.todosBloc}) {
     todosSubscription = todosBloc.listen((state) {
       if (state is TodosLoadSuccess) {
         add(TodosUpdated((todosBloc.state as TodosLoadSuccess).todos));
@@ -18,7 +21,7 @@ class RequestBloc extends Bloc<RequestEvent, RequestState> {
   }
 
   @override
-  RequestState get initialState {
+  FilteredRequestState get initialState {
     return todosBloc.state is TodosLoadSuccess
         ? FilteredTodosLoadSuccess(
             (todosBloc.state as TodosLoadSuccess).todos,
@@ -28,15 +31,18 @@ class RequestBloc extends Bloc<RequestEvent, RequestState> {
   }
 
   @override
-  Stream<RequestState> mapEventToState(RequestEvent event) async* {
+  Stream<FilteredRequestState> mapEventToState(FilteredRequestEvent event) async* {
     if (event is FilterUpdated) {
       yield* _mapFilterUpdatedToState(event);
     } else if (event is TodosUpdated) {
       yield* _mapTodosUpdatedToState(event);
     }
+    else if (event is FilteredRequestMessageLoaded) {
+      yield* _mapFilteredRequestMessageLoadedToState(event);
+    }
   }
 
-  Stream<RequestState> _mapFilterUpdatedToState(
+  Stream<FilteredRequestState> _mapFilterUpdatedToState(
     FilterUpdated event,
   ) async* {
     if (todosBloc.state is TodosLoadSuccess) {
@@ -50,7 +56,7 @@ class RequestBloc extends Bloc<RequestEvent, RequestState> {
     }
   }
 
-  Stream<RequestState> _mapTodosUpdatedToState(
+  Stream<FilteredRequestState> _mapTodosUpdatedToState(
     TodosUpdated event,
   ) async* {
     final visibilityFilter = state is FilteredTodosLoadSuccess
@@ -63,6 +69,16 @@ class RequestBloc extends Bloc<RequestEvent, RequestState> {
       ),
       visibilityFilter,
     );
+  }
+
+  Stream<FilteredRequestState> _mapFilteredRequestMessageLoadedToState(
+    FilteredRequestMessageLoaded event,
+  ) async* {
+     final todos = await this.todosRepository.loadRequestMessage();
+      yield FilteredRequestMessageLoad(
+        event.user,
+        todos.map(MessageEntity.fromEntity).toList(),
+      );
   }
 
   List<User> _mapTodosToFilteredTodos(

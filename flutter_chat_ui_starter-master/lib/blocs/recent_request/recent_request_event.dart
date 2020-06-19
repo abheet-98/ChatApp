@@ -3,14 +3,14 @@ import 'package:flutter_todos/models/models.dart';
 
 import '../../models/user.dart';
 
-abstract class RecentRequestEvent extends Equatable {
-  const RecentRequestEvent();
+abstract class RecentFilteredRequestEvent extends Equatable {
+  const RecentFilteredRequestEvent();
 
   @override
   List<Object> get props => [];
 }
 
-class RecentRequestLoadedEvent extends RecentRequestEvent {
+class RecentRequestLoadedEvent extends RecentFilteredRequestEvent {
 
   final User user;
 
@@ -24,7 +24,7 @@ class RecentRequestLoadedEvent extends RecentRequestEvent {
 
 }
 
-class MessageShowEvent extends RecentRequestEvent {
+class MessageShowEvent extends RecentFilteredRequestEvent {
 
   final User user;
 

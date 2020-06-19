@@ -16,7 +16,7 @@ class DetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RequestMessagePage(user:this.user);
-    /* BlocBuilder<TodosBloc, TodosState>(
+    /* BlocBuilder<RequestBloc, RequestState>(
       builder: (context, state) {
         final todo = (state as TodosLoadSuccess)
             .todos
@@ -31,7 +31,7 @@ class DetailsScreen extends StatelessWidget {
                 key: ArchSampleKeys.deleteTodoButton,
                 icon: Icon(Icons.delete),
                 onPressed: () {
-                  BlocProvider.of<TodosBloc>(context).add(TodoDeleted(todo));
+                  BlocProvider.of<RequestBloc>(context).add(TodoDeleted(todo));
                   Navigator.pop(context, todo);
                 },
               )
@@ -52,7 +52,7 @@ class DetailsScreen extends StatelessWidget {
                                 key: FlutterTodosKeys.detailsScreenCheckBox,
                                 value: todo.complete,
                                 onChanged: (_) {
-                                  BlocProvider.of<TodosBloc>(context).add(
+                                  BlocProvider.of<RequestBloc>(context).add(
                                     TodoUpdated(
                                       todo.copyWith(complete: !todo.complete),
                                     ),
@@ -105,7 +105,7 @@ class DetailsScreen extends StatelessWidget {
                           return AddEditScreen(
                             key: ArchSampleKeys.editTodoScreen,
                             onSave: (task, note) {
-                              BlocProvider.of<TodosBloc>(context).add(
+                              BlocProvider.of<RequestBloc>(context).add(
                                 TodoUpdated(
                                   todo.copyWith(task: task, note: note),
                                 ),

@@ -3,21 +3,21 @@ import 'package:flutter_todos/models/models.dart';
 
 import '../../models/user.dart';
 
-abstract class RecentRequestState extends Equatable {
-  const RecentRequestState();
+abstract class RecentFilteredRequestState extends Equatable {
+  const RecentFilteredRequestState();
 
   @override
   List<Object> get props => [];
 }
 
-class RecentRequestLoadInProgress extends RecentRequestState {
+class RecentRequestLoadInProgress extends RecentFilteredRequestState {
 
 
 }
 
-class RecentRequestLoadFailure extends RecentRequestState {}
+class RecentRequestLoadFailure extends RecentFilteredRequestState {}
 
-class RecentRequestLoadSuccess extends RecentRequestState {
+class RecentRequestLoadSuccess extends RecentFilteredRequestState {
 
   final User user;
 
@@ -30,7 +30,7 @@ class RecentRequestLoadSuccess extends RecentRequestState {
   String toString() => 'RecentRequestLoadSuccess { todo: ${user.name} }';
 }
 
-/* class RecentChatLoading extends RecentRequestState {
+/* class RecentChatLoading extends RecentFilteredRequestState {
 
   final User user;
 
@@ -44,7 +44,7 @@ class RecentRequestLoadSuccess extends RecentRequestState {
 }
 */
 
-class RecentChatLoaded extends RecentRequestState {
+class RecentChatLoaded extends RecentFilteredRequestState {
 
   final User user;
 
@@ -57,7 +57,7 @@ class RecentChatLoaded extends RecentRequestState {
   String toString() => 'ChatLoading { todo: ${user.name} }';
 }
 
-class MessageShow extends RecentRequestState {
+class MessageShow extends RecentFilteredRequestState {
 
   final User user;
 

@@ -17,7 +17,7 @@ void main() {
   runApp(
     BlocProvider(
       create: (context) {
-        return TodosBloc(
+        return RequestBloc(
           todosRepository: const TodosRepositoryFlutter(
             fileStorage: const FileStorage(
               '__flutter_bloc_app__',
@@ -48,14 +48,14 @@ class TodosApp extends StatelessWidget {
               BlocProvider<TabBloc>(
                 create: (context) => TabBloc(),
               ),
-              BlocProvider<RequestBloc>(
-                create: (context) => RequestBloc(
-                  todosBloc: BlocProvider.of<TodosBloc>(context),
+              BlocProvider<FilteredRequestBloc>(
+                create: (context) => FilteredRequestBloc(
+                  todosBloc: BlocProvider.of<RequestBloc>(context),
                 ),
               ),
               BlocProvider<StatsBloc>(
                 create: (context) => StatsBloc(
-                  todosBloc: BlocProvider.of<TodosBloc>(context),
+                  todosBloc: BlocProvider.of<RequestBloc>(context),
                 ),
               ),
             ],
@@ -66,7 +66,7 @@ class TodosApp extends StatelessWidget {
           return AddEditScreen(
             key: ArchSampleKeys.addTodoScreen,
             onSave: (task, note) {
-              BlocProvider.of<TodosBloc>(context).add(
+              BlocProvider.of<RequestBloc>(context).add(
                 TodoAdded(User(task, note: note)),
               );
             },

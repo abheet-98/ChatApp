@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter_todos/blocs/blocs.dart';
 
 class StatsBloc extends Bloc<StatsEvent, StatsState> {
-  final TodosBloc todosBloc;
+  final RequestBloc todosBloc;
   StreamSubscription todosSubscription;
 
   StatsBloc({@required this.todosBloc}) {

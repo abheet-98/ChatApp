@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_todos/core/todos_app_core.dart';
 import 'package:flutter_todos/blocs/blocs.dart';
+import 'package:flutter_todos/widgets/request_message.dart';
 import 'package:flutter_todos/widgets/user_tile.dart';
 import 'package:flutter_todos/widgets/widgets.dart';
 import 'package:flutter_todos/screens/screens.dart';
@@ -16,7 +17,7 @@ class RequestPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final localizations = ArchSampleLocalizations.of(context);
 
-    return BlocBuilder<RequestBloc, RequestState>(
+    return BlocConsumer<FilteredRequestBloc, FilteredRequestState>(
       builder: (context, state) {
         if (state is FilteredTodosLoadInProgress) {
           return LoadingIndicator(key: ArchSampleKeys.todosLoading);
@@ -30,33 +31,28 @@ class RequestPage extends StatelessWidget {
               return UserTille(
                 user: user,
                 onDismissed: (direction) {
-                  BlocProvider.of<TodosBloc>(context).add(TodoDeleted(user));
+                  BlocProvider.of<RequestBloc>(context).add(TodoDeleted(user));
                   Scaffold.of(context).showSnackBar(DeleteTodoSnackBar(
                     key: ArchSampleKeys.snackbar,
                     todo: user,
-                    onUndo: () => BlocProvider.of<TodosBloc>(context)
+                    onUndo: () => BlocProvider.of<RequestBloc>(context)
                         .add(TodoAdded(user)),
                     localizations: localizations,
                   ));
                 },
                 onTap: () async {
-                  final removedTodo = await Navigator.of(context).push(
+                  if(state is FilteredRequestMessageLoad)  {
+                    Navigator.of(context).push(
                     MaterialPageRoute(builder: (_) {
-                      return DetailsScreen(user: user);
+                      return RequestMessagePage(user: state.user,);
                     }),
                   );
-                  if (removedTodo != null) {
-                    Scaffold.of(context).showSnackBar(DeleteTodoSnackBar(
-                      key: ArchSampleKeys.snackbar,
-                      todo: user,
-                      onUndo: () => BlocProvider.of<TodosBloc>(context)
-                          .add(TodoAdded(user)),
-                      localizations: localizations,
-                    ));
-                  }
+                 
+          
+        }
                 },
 //                onCheckboxChanged: (_) {
-//                  BlocProvider.of<TodosBloc>(context).add(
+//                  BlocProvider.of<RequestBloc>(context).add(
 //                    TodoUpdated(user.copyWith(complete: !user.complete)),
 //                  );
 //                },
@@ -66,7 +62,19 @@ class RequestPage extends StatelessWidget {
         } else {
           return Container(key: FlutterTodosKeys.filteredTodosEmptyContainer);
         }
-      },
+      }, 
+      listener: (context, state)  { 
+        if(state is FilteredRequestMessageLoad)  {
+           Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) {
+                      return RequestMessagePage(user: state.user,);
+                    }),
+                  );
+                 
+          
+        }
+
+       },
     );
   }
 }

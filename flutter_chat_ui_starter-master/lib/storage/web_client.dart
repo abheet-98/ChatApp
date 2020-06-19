@@ -4,6 +4,7 @@
 
 import 'dart:async';
 
+import 'package:flutter_todos/models/message_entity.dart';
 import 'package:flutter_todos/repository/todos_repository_core.dart';
 
 /// A class that is meant to represent a Client that would be used to call a Web
@@ -81,4 +82,64 @@ class WebClient {
   Future<bool> postTodos(List<TodoEntity> todos) async {
     return Future.value(true);
   }
+
+
+  Future<List<MessageEntity>> fetchMessage() async {
+    return Future.delayed(
+        delay,
+        () => [
+              MessageEntity(
+                'Buy food for da kitty',
+                '1',
+                'With the chickeny bits!',
+                false,
+                'Rahul',
+                'assets/images/greg.jpg'
+              ),
+              MessageEntity(
+                'Find a Red Sea dive trip',
+                '2',
+                'Echo vs MY Dream',
+                false,
+                  'Neeraj',
+                  'assets/images/greg.jpg'
+              ),
+              MessageEntity(
+                'Book flights to Egypt',
+                '3',
+                '',
+                true,
+                  'Sahil',
+                  'assets/images/greg.jpg'
+              ),
+              MessageEntity(
+                'Decide on accommodation',
+                '4',
+                '',
+                false,
+                  'Dishant',
+                  'assets/images/greg.jpg'
+              ),
+              MessageEntity(
+                'Sip Margaritas',
+                '5',
+                'on the beach',
+                true,
+                  'Gaurav',
+                  'assets/images/greg.jpg'
+              ),
+              MessageEntity(
+                'Sip Margaritas',
+                '6',
+                'on the beach',
+                true,
+                  'Bharat',
+                  'assets/images/greg.jpg'
+              ),
+
+
+
+            ]);
+
+}
 }

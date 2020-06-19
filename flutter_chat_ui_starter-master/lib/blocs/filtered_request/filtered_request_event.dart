@@ -1,11 +1,11 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_todos/models/models.dart';
 
-abstract class RequestEvent extends Equatable {
-  const RequestEvent();
+abstract class FilteredRequestEvent extends Equatable {
+  const FilteredRequestEvent();
 }
 
-class FilterUpdated extends RequestEvent {
+class FilterUpdated extends FilteredRequestEvent {
   final VisibilityFilter filter;
 
   const FilterUpdated(this.filter);
@@ -17,7 +17,7 @@ class FilterUpdated extends RequestEvent {
   String toString() => 'FilterUpdated { filter: $filter }';
 }
 
-class TodosUpdated extends RequestEvent {
+class TodosUpdated extends FilteredRequestEvent {
   final List<User> todos;
 
   const TodosUpdated(this.todos);
@@ -27,4 +27,16 @@ class TodosUpdated extends RequestEvent {
 
   @override
   String toString() => 'TodosUpdated { todos: $todos }';
+}
+
+class FilteredRequestMessageLoaded extends FilteredRequestEvent {
+  final User user;
+
+  const FilteredRequestMessageLoaded(this.user);
+
+  @override
+  List<Object> get props => [user];
+
+  @override
+  String toString() => 'FilteredRequestMessageLoaded { user: $user }';
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todos/models/message_entity.dart';
 import 'package:flutter_todos/models/message_model.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,8 +12,8 @@ import 'loading_indicator.dart';
 
 class RequestMessagePage extends StatefulWidget {
   final User user;
-
-  RequestMessagePage({this.user});
+  final List<MessageEntity> messageList;
+  RequestMessagePage({this.user,this.messageList});
   @override
   _RequestMessagePageState createState() => _RequestMessagePageState();
 }

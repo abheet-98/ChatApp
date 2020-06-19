@@ -16,11 +16,11 @@ class FilterButton extends StatelessWidget {
         .textTheme
         .bodyText2
         .copyWith(color: Theme.of(context).accentColor);
-    return BlocBuilder<RequestBloc, RequestState>(
+    return BlocBuilder<FilteredRequestBloc, FilteredRequestState>(
         builder: (context, state) {
       final button = _Button(
         onSelected: (filter) {
-          BlocProvider.of<RequestBloc>(context)
+          BlocProvider.of<FilteredRequestBloc>(context)
               .add(FilterUpdated(filter));
         },
         activeFilter: state is FilteredTodosLoadSuccess
