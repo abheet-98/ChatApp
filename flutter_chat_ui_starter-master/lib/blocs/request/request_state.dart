@@ -22,5 +22,17 @@ class RequestLoadSuccess extends RequestState {
   @override
   String toString() => 'RequestLoadSuccess { requests: $requests }';
 }
+class RequestMessageOpened extends RequestState {
+  final Request request;
 
+  const RequestMessageOpened(this.request);
+
+  @override
+  List<Object> get props => [request];
+
+  @override
+  String toString() => 'RequestMessageOpened { request: $request }';
+}
+
+//requestmessageopened state
 class RequestLoadFailure extends RequestState {}

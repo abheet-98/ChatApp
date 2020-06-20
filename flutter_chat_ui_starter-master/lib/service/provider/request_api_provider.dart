@@ -38,12 +38,19 @@ class RequestApiProvider {
   }
 
   Future<List<RequestMessage>> getRequestMessageList(Request request) async {
-    var response = await http.get('/request/message/list/',queryParameters: request.toJson());
+    /* var response = await http.get('/request/message/list/',queryParameters: request.toJson());
     // print(response);
     return response.data
         .map<Request>((item) => Request.fromJson(item))
-        .toList();
+        .toList(); */
 
+    {
+      final todos = await webClient.fetchRequestMessages(request);
+
+//      fileStorage.saveRequest(todos);
+
+      return todos;
+    }
   }
 
 }

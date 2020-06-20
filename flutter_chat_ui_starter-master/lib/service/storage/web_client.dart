@@ -120,6 +120,51 @@ class WebClient {
         () => requestList);
   }
 
+
+
+
+  /// Mock that "fetches" some Request from a "web service" after a short delay
+  ///
+  Future<List<RequestMessage>> fetchRequestMessages(Request request) async {
+    debugPrint('load fetchRequestMessages request: ${request}');
+//    final file = await _getLocalFile();
+//    final string = await file.readAsString();
+    final string = await '''{
+  "result": [
+    {
+      "id": 1,
+      "messageText": "Hello"
+    },
+    {
+      "id": 2,
+      "messageText": "Hello"
+    },
+    {
+      "id": 3,
+      "messageText": "Hello"
+    },
+    {
+      "id": 4,
+      "messageText": "Hello"
+    }
+  ],
+  "count": 4,
+  "next": null,
+  "previous": null,
+  "status": 200
+}''';
+
+    final json = JsonDecoder().convert(string);
+    debugPrint('fetchRequestMessages json: $json');
+    final requestMessagesList = (json['result'])
+        .map<RequestMessage>((_requestMessage) => RequestMessage.fromJson(_requestMessage))
+        .toList();
+    debugPrint('requestMessagesList file: ${requestMessagesList.toString()}');
+    return Future.delayed(
+        delay,
+        () => requestMessagesList);
+  }
+
   /// Mock that returns true or false for success or failure. In this case,
   /// it will "Always Succeed"
 

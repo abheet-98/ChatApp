@@ -14,8 +14,7 @@ void main() {
   // We can set the BlocSupervisor's delegate to an instance of `SimpleBlocDelegate`.
   // This will allow us to handle all transitions and errors in SimpleBlocDelegate.
   BlocSupervisor.delegate = SimpleBlocDelegate();
-  runApp(
-      RequestApp()
+  runApp(RequestApp()
 //    BlocProvider(
 //      create: (context) {
 //        return RequestBloc(
@@ -29,7 +28,7 @@ void main() {
 //      },
 //      child: RequestApp(),
 //    ),
-  );
+      );
 }
 
 class RequestApp extends StatelessWidget {
@@ -49,12 +48,10 @@ class RequestApp extends StatelessWidget {
               BlocProvider<RequestBloc>(
                 create: (context) => RequestBloc()..add(RequestLoaded(null)),
               ),
-
             ],
             child: Scaffold(
               appBar: AppBar(
                 title: Text(FlutterBlocLocalizations.of(context).appTitle),
-
               ),
 //          body: activeTab == AppTab.todos ? FilteredRequest() : Stats(),
               body: RequestPage(),
@@ -74,7 +71,6 @@ class RequestApp extends StatelessWidget {
             ),
           );
         },
-
       },
     );
   }
