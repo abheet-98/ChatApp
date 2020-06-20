@@ -14,7 +14,7 @@ class RequestMessageLoadInProgress extends RequestMessageState {}
 class RequestMessageLoadSuccess extends RequestMessageState {
   final List<RequestMessage> requestmessages;
 
-  const RequestMessageLoadSuccess([this.requestmessages = const []]);
+  const RequestMessageLoadSuccess(this.requestmessages);
 
   @override
   List<Object> get props => [requestmessages];

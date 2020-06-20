@@ -130,29 +130,29 @@ class WebClient {
 //    final file = await _getLocalFile();
 //    final string = await file.readAsString();
     final string = await '''{
-  "result": [
-    {
-      "id": 1,
-      "messageText": "Hello"
-    },
-    {
-      "id": 2,
-      "messageText": "Hello"
-    },
-    {
-      "id": 3,
-      "messageText": "Hello"
-    },
-    {
-      "id": 4,
-      "messageText": "Hello"
-    }
-  ],
-  "count": 4,
-  "next": null,
-  "previous": null,
-  "status": 200
-}''';
+            "result": [
+              {
+                "id": 1,
+                "message_text": "Hello"
+              },
+              {
+                "id": 2,
+                "message_text": "Hello"
+              },
+              {
+                "id": 3,
+                "message_text": "Hello"
+              },
+              {
+                "id": 4,
+                "message_text": "Hello"
+              }
+            ],
+            "count": 4,
+            "next": null,
+            "previous": null,
+            "status": 200
+          }''';
 
     final json = JsonDecoder().convert(string);
     debugPrint('fetchRequestMessages json: $json');

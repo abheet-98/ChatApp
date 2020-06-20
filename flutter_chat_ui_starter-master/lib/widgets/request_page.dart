@@ -25,7 +25,7 @@ class RequestPage extends StatelessWidget {
         if (state is RequestMessageOpened) {
           Navigator.of(context).push(
             MaterialPageRoute(builder: (_) {
-              print(state.request.name.toString());
+              print(state.request.title.toString());
               return RequestMessagePage(request: state.request);
             }),
           );

@@ -13,7 +13,7 @@ import '../app_keys.dart';
 
 class RequestMessagePage extends StatelessWidget {
   final Request request;
-  RequestMessagePage({Key key, this.request}) : super(key: key);
+  RequestMessagePage({this.request});
 
   @override
   Widget build(BuildContext context) {
@@ -35,18 +35,18 @@ class RequestMessagePage extends StatelessWidget {
               return LoadingIndicator(key: ArchSampleKeys.todosLoading);
             } else if (state is RequestMessageLoadSuccess) {
               final requests = state.requestmessages;
-              //print("Helllllo"+this.request.name.toString());
+              print("requests" + requests.toString());
               return Scaffold(
                 appBar: AppBar(
-                  title: Text(this.request.name.toString()),
+                  title: Text(this.request.title),
                 ),
                 body: ListView.builder(
                   key: ArchSampleKeys.todoList,
-                  itemCount: requests != null ? requests.length : 0,
+                  itemCount: requests != null && requests.length > 0 ? requests.length : 0,
                   itemBuilder: (BuildContext context, int index) {
-                    final request = requests[index];
+//                    final request = requests[index];
                     return RequestMessageTile(
-                      requestMessage: request,
+                      requestMessage: requests[index],
                       onDismissed: (direction) {},
                       onTap: () async {
                         final removedTodo = await Navigator.of(context).push(

@@ -3,9 +3,9 @@ import 'package:equatable/equatable.dart';
 class Request extends Equatable {
   int id;
   String title;
-  String name;
-  String url;
-  String task;
+//  String name;
+//  String url;
+//  String task;
   int toUser;
   int fromUser;
   int adminUser;
@@ -23,9 +23,9 @@ class Request extends Equatable {
   Request(
       {this.id,
         this.title,
-        this.name,
-        this.url,
-        this.task,
+//        this.name,
+//        this.url,
+//        this.task,
         this.toUser,
         this.fromUser,
         this.adminUser,
@@ -43,9 +43,9 @@ class Request extends Equatable {
   Request.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
-    name = json['name'];
-    url = json['url'];
-    task = json['task'];
+//    name = json['name'];
+//    url = json['url'];
+//    task = json['task'];
     toUser = json['to_user'];
     fromUser = json['from_user'];
     adminUser = json['admin_user'];
@@ -65,9 +65,9 @@ class Request extends Equatable {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['title'] = this.title;
-    data['name'] = this.name;
-    data['url'] = this.url;
-    data['task'] = this.task;
+//    data['name'] = this.name;
+//    data['url'] = this.url;
+//    data['task'] = this.task;
     data['to_user'] = this.toUser;
     data['from_user'] = this.fromUser;
     data['admin_user'] = this.adminUser;

@@ -14,7 +14,7 @@ class RequestLoadInProgress extends RequestState {}
 class RequestLoadSuccess extends RequestState {
   final List<Request> requests;
 
-  const RequestLoadSuccess([this.requests = const []]);
+  const RequestLoadSuccess(this.requests);
 
   @override
   List<Object> get props => [requests];

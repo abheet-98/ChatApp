@@ -22,8 +22,8 @@ class RequestMessageTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dismissible(
-      key: Key(requestMessage.id.toString()),
-      onDismissed: onDismissed,
+      key: Key(this.requestMessage.id.toString()),
+//      onDismissed: onDismissed,
       child: GestureDetector(
         onTap: onTap,
         child: Container(
@@ -72,7 +72,7 @@ class RequestMessageTile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        requestMessage.messageText,
+                        this.requestMessage.messageText != null ? this.requestMessage.messageText : 'Blank',
                         style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16.0),
                       ),
                       SizedBox(
@@ -81,7 +81,7 @@ class RequestMessageTile extends StatelessWidget {
                       Container(
                         width: MediaQuery.of(context).size.width * 0.60,
                         child: Text(
-                          requestMessage.messageText,
+                          this.requestMessage.messageText != null ? this.requestMessage.messageText : 'Blank',
                           style: TextStyle(fontSize: 14.0),
                           overflow: TextOverflow.ellipsis,
                         ),
