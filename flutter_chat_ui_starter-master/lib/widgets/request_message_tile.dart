@@ -5,24 +5,24 @@ import 'package:bethere_app/models/request.dart';
 import 'package:bethere_app/core/todos_app_core.dart';
 import 'package:bethere_app/models/models.dart';
 
-class RequestTile extends StatelessWidget {
+class RequestMessageTile extends StatelessWidget {
   final DismissDirectionCallback onDismissed;
   final GestureTapCallback onTap;
   final ValueChanged<bool> onCheckboxChanged;
-  final Request request;
+  final RequestMessage requestMessage;
 
-  RequestTile({
+  RequestMessageTile({
     Key key,
     @required this.onDismissed,
     @required this.onTap,
     @required this.onCheckboxChanged,
-    @required this.request,
+    @required this.requestMessage,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Dismissible(
-      key: Key(request.id.toString()),
+      key: Key(requestMessage.id.toString()),
       onDismissed: onDismissed,
       child: GestureDetector(
         onTap: onTap,
@@ -63,7 +63,7 @@ class RequestTile extends StatelessWidget {
                   ),
                   /* CircleAvatar(
                     radius: 35.0,
-                    backgroundImage: AssetImage(request.url),
+                    backgroundImage: AssetImage(requestMessage.url),
                   ), */
                   SizedBox(
                     width: 10.0,
@@ -72,7 +72,7 @@ class RequestTile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        request.title,
+                        requestMessage.messageText,
                         style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16.0),
                       ),
                       SizedBox(
@@ -81,7 +81,7 @@ class RequestTile extends StatelessWidget {
                       Container(
                         width: MediaQuery.of(context).size.width * 0.60,
                         child: Text(
-                          request.title,
+                          requestMessage.messageText,
                           style: TextStyle(fontSize: 14.0),
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -94,7 +94,7 @@ class RequestTile extends StatelessWidget {
               ),
               /* Column(
             children: <Widget>[
-              Text(request.),
+              Text(requestMessage.),
               SizedBox(
                 height: 5.0,
               ),

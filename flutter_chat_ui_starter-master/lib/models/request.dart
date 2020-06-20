@@ -94,7 +94,7 @@ class Request extends Equatable {
 
 
 
-class RequestMessage  extends Equatable  {
+/* class RequestMessage  extends Equatable  {
   int id;
   User user;
   int actionByUser;
@@ -237,7 +237,7 @@ class RequestMessage  extends Equatable  {
   @override
   // TODO: implement props
   List<Object> get props => [];
-}
+} */
 
 class User {
   int id;
@@ -328,4 +328,36 @@ class Status {
     data['stext'] = this.stext;
     return data;
   }
+}
+class RequestMessage  extends Equatable  {
+  int id;
+  
+  String messageText;
+  
+
+  RequestMessage(
+      {this.id,
+        
+        this.messageText,
+        });
+
+  RequestMessage.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    
+    messageText = json['message_text'];
+    
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    
+    data['message_text'] = this.messageText;
+    
+    return data;
+  }
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [];
 }

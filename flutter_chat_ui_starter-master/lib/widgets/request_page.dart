@@ -1,3 +1,4 @@
+import 'package:bethere_app/widgets/request_message_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
@@ -7,6 +8,9 @@ import 'package:bethere_app/blocs/blocs.dart';
 import 'package:bethere_app/widgets/request_tile.dart';
 import 'package:bethere_app/widgets/widgets.dart';
 import 'package:bethere_app/screens/screens.dart';
+import 'package:bethere_app/blocs/blocs.dart';
+import 'package:bethere_app/blocs/blocs.dart';
+import 'package:bethere_app/blocs/request/request.dart';
 import '../app_keys.dart';
 
 class RequestPage extends StatelessWidget {
@@ -18,7 +22,14 @@ class RequestPage extends StatelessWidget {
 
     return BlocConsumer<RequestBloc, RequestState>(
       listener: (context, state) {
-//        if(state is )
+        if (state is RequestMessageOpened) {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (_) {
+              print(state.request.name.toString());
+              return RequestMessagePage(request: state.request);
+            }),
+          );
+        }
       },
       builder: (context, state) {
         if (state is RequestLoadInProgress) {
@@ -30,18 +41,19 @@ class RequestPage extends StatelessWidget {
             itemCount: requests.length,
             itemBuilder: (BuildContext context, int index) {
               final request = requests[index];
+              //print("HEEYYYY"+request.title.toString());
               return RequestTile(
+                
                 request: request,
-                onDismissed: (direction) {
-
-                },
+                onDismissed: (direction) {},
                 onTap: () async {
-                  final removedTodo = await Navigator.of(context).push(
-                    MaterialPageRoute(builder: (_) {
-//                      return DetailsScreen(id: request.id);
-                    }),
-                  );
+                  print("tapped");
+                  /* BlocProvider<RequestBloc>(
+                    create: (context) =>
+                        RequestBloc()..add(RequestMessageOpen(request)),
+                  ); */
 
+                  BlocProvider.of<RequestBloc>(context).add(RequestMessageOpen(request));
                 },
 //                onCheckboxChanged: (_) {
 //                  BlocProvider.of<RequestBloc>(context).add(
