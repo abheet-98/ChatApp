@@ -38,7 +38,9 @@ class RequestPage extends StatelessWidget {
           final requests = state.requests;
           return ListView.builder(
             key: ArchSampleKeys.todoList,
-            itemCount: requests.length,
+            itemCount:  requests != null && requests.length > 0
+                      ? requests.length
+                      : 0,
             itemBuilder: (BuildContext context, int index) {
               final request = requests[index];
               //print("HEEYYYY"+request.title.toString());

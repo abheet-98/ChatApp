@@ -133,19 +133,35 @@ class WebClient {
             "result": [
               {
                 "id": 1,
-                "message_text": "Hello"
+                "seen":true,
+                "message_text": "Hello",
+                "item_title":"Video Message",
+                "status":"Completed",
+                "created_date":"15/06/20"
               },
               {
                 "id": 2,
-                "message_text": "Hello"
+                "seen":false,
+                "message_text": "Hello",
+                "item_title":"Video Call",
+                "status":"Pending",
+                "created_date":"15/06/20"
               },
               {
                 "id": 3,
-                "message_text": "Hello"
+                "seen":false,
+                "message_text": "Hello",
+                "item_title":"Live Show",
+                "status":"Completed",               
+                "created_date":"15/06/20"
               },
               {
                 "id": 4,
-                "message_text": "Hello"
+                "seen":true,
+                "message_text": "Hello",
+                "item_title":"Video Message",
+                "status":"Completed",
+                "created_date":"15/06/20"
               }
             ],
             "count": 4,

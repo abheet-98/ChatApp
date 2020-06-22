@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:bethere_app/models/request.dart';
 import 'package:bethere_app/core/todos_app_core.dart';
 import 'package:bethere_app/models/models.dart';
+import 'package:badges/badges.dart';
 
 class RequestMessageTile extends StatelessWidget {
   final DismissDirectionCallback onDismissed;
@@ -27,8 +28,8 @@ class RequestMessageTile extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: Container(
-          margin:
-              EdgeInsets.only(top: 5.0, bottom: 5.0, right: 10.0, left: 5.0),
+          height: 60.0,
+          margin: EdgeInsets.only(top: 5.0, bottom: 5.0, right: 10.0, left: 5.0),
           padding: EdgeInsets.symmetric(horizontal: 1.0, vertical: 5.0),
           decoration: BoxDecoration(color: Colors.blueGrey[50]),
           child: Row(
@@ -36,7 +37,7 @@ class RequestMessageTile extends StatelessWidget {
             children: <Widget>[
               Row(
                 children: <Widget>[
-                  CachedNetworkImage(
+                  /* CachedNetworkImage(
                     //https://ik.imagekit.io/bethere/tr:w-500,c-fill,q-auto/public/556b7519-4e7.jpeg?ik-sdk-version=python-2.2.4
                     imageUrl:
                         "https://ik.imagekit.io/bethere/tr:w-500,c-fill,q-auto/public/556b7519-4e7.jpeg?ik-sdk-version=python-2.2.4",
@@ -60,20 +61,32 @@ class RequestMessageTile extends StatelessWidget {
                             image: imageProvider, fit: BoxFit.cover),
                       ),
                     ),
-                  ),
+                  ), */
                   /* CircleAvatar(
                     radius: 35.0,
                     backgroundImage: AssetImage(requestMessage.url),
                   ), */
                   SizedBox(
-                    width: 10.0,
+                    width: 5.0,
+                  ),
+                  Badge(
+                    badgeColor: Colors.deepPurple,
+                    shape: BadgeShape.circle,
+                    /* borderRadius: 20,
+                    toAnimate: false,
+                    badgeContent:
+                        Text('NEW', style: TextStyle(color: Colors.white)), */
+                    showBadge: this.requestMessage.seen,
+                  ),
+                  SizedBox(
+                    width: 15.0,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        this.requestMessage.messageText != null ? this.requestMessage.messageText : 'Blank',
-                        style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16.0),
+                        this.requestMessage.itemTitle != null ? this.requestMessage.itemTitle : 'Blank',
+                        style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18.0),
                       ),
                       SizedBox(
                         height: 5.0,
@@ -82,14 +95,21 @@ class RequestMessageTile extends StatelessWidget {
                         width: MediaQuery.of(context).size.width * 0.60,
                         child: Text(
                           this.requestMessage.messageText != null ? this.requestMessage.messageText : 'Blank',
-                          style: TextStyle(fontSize: 14.0),
+                          style: TextStyle(fontSize: 15.0),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(width: 10,),
-                  Text("7:00 AM"),
+                  SizedBox(width: 15.0,),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(this.requestMessage.status),
+                      SizedBox(height: 5.0,),
+                      Text(this.requestMessage.createdDate),
+                    ],
+                  ),
                 ],
               ),
               /* Column(

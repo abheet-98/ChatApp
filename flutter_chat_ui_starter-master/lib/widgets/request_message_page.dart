@@ -26,23 +26,26 @@ class RequestMessagePage extends StatelessWidget {
                 RequestMessageBloc()..add(RequestMessageLoaded(this.request)),
           ),
         ],
-        child: BlocConsumer<RequestMessageBloc, RequestMessageState>(
-          listener: (context, state) {
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(this.request.title),
+          ),
+          body: BlocConsumer<RequestMessageBloc, RequestMessageState>(
+            listener: (context, state) {
 //        if(state is )
-          },
-          builder: (context, state) {
-            if (state is RequestMessageLoadInProgress) {
-              return LoadingIndicator(key: ArchSampleKeys.todosLoading);
-            } else if (state is RequestMessageLoadSuccess) {
-              final requests = state.requestmessages;
-              print("requests" + requests.toString());
-              return Scaffold(
-                appBar: AppBar(
-                  title: Text(this.request.title),
-                ),
-                body: ListView.builder(
+            },
+            builder: (context, state) {
+              if (state is RequestMessageLoadInProgress) {
+                return LoadingIndicator(key: ArchSampleKeys.todosLoading);
+              } else if (state is RequestMessageLoadSuccess) {
+                final requests = state.requestmessages;
+                print("requests" + requests.toString());
+
+                return ListView.builder(
                   key: ArchSampleKeys.todoList,
-                  itemCount: requests != null && requests.length > 0 ? requests.length : 0,
+                  itemCount: requests != null && requests.length > 0
+                      ? requests.length
+                      : 0,
                   itemBuilder: (BuildContext context, int index) {
 //                    final request = requests[index];
                     return RequestMessageTile(
@@ -62,12 +65,12 @@ class RequestMessagePage extends StatelessWidget {
 //                },
                     );
                   },
-                ),
-              );
-            } else {
-              return Container(key: AppKeys.filteredRequestEmptyContainer);
-            }
-          },
+                );
+              } else {
+                return Container(key: AppKeys.filteredRequestEmptyContainer);
+              }
+            },
+          ),
         ));
   }
 }
