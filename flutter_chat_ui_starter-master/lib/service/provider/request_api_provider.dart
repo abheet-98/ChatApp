@@ -16,21 +16,21 @@ class RequestApiProvider {
   /// error, it attempts to load the Request from a Web Client.
 
   Future<List<Request>> loadRequest(Request request) async {
-//    var response = await http.get('/request/list/',queryParameters: request.paramToJson());
-//    // print(response);
-//    return response.data
-//        .map<Request>((item) => Request.fromJson(item))
-//        .toList();
+    var response = await http.get('/request/list/',queryParameters: request.paramToJson());
+     print(response);
+    return response.data
+        .map<Request>((item) => Request.fromJson(item))
+        .toList();
 //    try {
 //      return await fileStorage.loadRequest();
 //    } catch (e)
-    {
+    /* {
       final todos = await webClient.fetchRequests(request);
 
 //      fileStorage.saveRequest(todos);
 
       return todos;
-    }
+    } */
   }
 
   Future<List<Request>> getRequestList(Request request) async {
@@ -43,19 +43,19 @@ class RequestApiProvider {
   }
 
   Future<List<RequestMessage>> getRequestMessageList(Request request) async {
-//    var response = await http.get('/request/message/list/',queryParameters: request.paramToJson());
-//    // print(response);
-//    return response.data
-//        .map<RequestMessage>((item) => RequestMessage.fromJson(item))
-//        .toList();
+    var response = await http.get('/request/message/list/',queryParameters: request.paramToJson());
+     print(response);
+    return response.data
+        .map<RequestMessage>((item) => RequestMessage.fromJson(item))
+        .toList();
 
-    {
-      final todos = await webClient.fetchRequestMessages(request);
+//     {
+//       final todos = await webClient.fetchRequestMessages(request);
 
-//      fileStorage.saveRequest(todos);
+// //      fileStorage.saveRequest(todos);
 
-      return todos;
-    }
+//       return todos;
+//     }
   }
 
 }

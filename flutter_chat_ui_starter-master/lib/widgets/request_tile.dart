@@ -30,7 +30,7 @@ class RequestTile extends StatelessWidget {
           margin:
               EdgeInsets.only(top: 5.0, bottom: 5.0, right: 10.0, left: 5.0),
           padding: EdgeInsets.symmetric(horizontal: 1.0, vertical: 5.0),
-          decoration: BoxDecoration(color: Colors.blueGrey[50]),
+          //decoration: BoxDecoration(color: Colors.blueGrey[50]),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -71,9 +71,13 @@ class RequestTile extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(
-                        request.title,
-                        style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16.0),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.60,
+                        child: Text(
+                          request.title,
+                          style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16.0),
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                       SizedBox(
                         height: 5.0,
@@ -86,12 +90,23 @@ class RequestTile extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
+                      SizedBox(
+                        height: 5.0,
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.60,
+                        child: Text(
+                          request.createdAt,
+                          style: TextStyle(fontSize: 14.0),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
                     ],
                   ),
-                  SizedBox(width: 10,),
-                  Text("7:00 AM"),
+                  
                 ],
               ),
+              
               /* Column(
             children: <Widget>[
               Text(request.),

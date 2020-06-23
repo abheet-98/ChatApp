@@ -10,8 +10,9 @@ final Http http = Http();
 class Http extends BaseHttp {
   @override
   void init() {
-    options.baseUrl = 'http://192.168.43.240:8004/api/v1';
-//    options.baseUrl = 'https://qa.be-there.co/api/v1';
+    //options.baseUrl = 'http://192.168.43.240:8004/api/v1';
+  options.baseUrl = 'http://157.245.151.185:8005/api/v1';
+  // options.baseUrl = 'https://qa.be-there.co/api/v1';
     interceptors..add(ApiInterceptor())
         /*// Cookie persistence asynchronous
       ..add(CookieManager(
@@ -28,7 +29,7 @@ class ApiInterceptor extends InterceptorsWrapper {
         ' data: ${options.data}');
 //    SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6Imxrc2luZ2giLCJleHAiOjE2MDgzNTU3NTcsImVtYWlsIjoibGtzaW5naC5pbmRpYUBnbWFpbC5jb20ifQ.MabwVR2S4QroWsD5TlNP-IQFhA-Cy5nrQzPIMJF3jd0";//await StorageManager.getToken();
+    var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0NjEsInVzZXJuYW1lIjoiYWJoZWV0X2dlcmFfODExOSIsImV4cCI6MTYwODQ1ODA1NywiZW1haWwiOiJhYmhlZXQuZ2VyYTAxQGdtYWlsLmNvbSJ9.ZH4XY7ISBi0cTyPOv5EW7EJju5HkCDOFcvYSklmstk0";//await StorageManager.getToken();
     if (token != null) {
       options.headers.addAll({"Authorization": "JWT $token"});
     }
@@ -60,11 +61,14 @@ class ApiInterceptor extends InterceptorsWrapper {
 
   @override
   onError(DioError dioError) {
-//    print(dioError.response);
-    if(dioError.response.statusCode == 403 || dioError.response.statusCode == 404){
-      StorageManager.deleteTokenAndUser();
-      ResponseData respData = ResponseData.fromJson({"status": dioError.response.statusCode, "message": dioError.response.statusMessage, "result": dioError.response.data});
-      throw UnAuthorizedException(data:respData);
+    print(dioError.response);
+    print(dioError);
+    if(dioError.response != null){
+      if(dioError.response.statusCode == 403 || dioError.response.statusCode == 404){
+        StorageManager.deleteTokenAndUser();
+        ResponseData respData = ResponseData.fromJson({"status": dioError.response.statusCode, "message": dioError.response.statusMessage, "result": dioError.response.data});
+        throw UnAuthorizedException(data:respData);
+      }
     }
     return super.onError(dioError);
   }

@@ -1,3 +1,5 @@
+import 'package:bethere_app/localization.dart';
+import 'package:bethere_app/models/request.dart';
 import 'package:bethere_app/widgets/request_message_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
@@ -20,55 +22,80 @@ class RequestPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final localizations = ArchSampleLocalizations.of(context);
 
-    return BlocConsumer<RequestBloc, RequestState>(
-      listener: (context, state) {
-        if (state is RequestMessageOpened) {
-          Navigator.of(context).push(
-            MaterialPageRoute(builder: (_) {
-              print(state.request.title.toString());
-              return RequestMessagePage(request: state.request);
-            }),
-          );
-        }
-      },
-      builder: (context, state) {
-        if (state is RequestLoadInProgress) {
-          return LoadingIndicator(key: ArchSampleKeys.todosLoading);
-        } else if (state is RequestLoadSuccess) {
-          final requests = state.requests;
-          return ListView.builder(
-            key: ArchSampleKeys.todoList,
-            itemCount:  requests != null && requests.length > 0
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider<RequestBloc>(
+            create: (context) =>
+                RequestBloc()..add(RequestLoaded(Request(id: 1))),
+          ),
+        ],
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(FlutterBlocLocalizations.of(context).appTitle),
+            actions: <Widget>[
+              IconButton(
+            icon: const Icon(Icons.refresh),
+            tooltip: 'Refresh',
+            onPressed: () {
+               RequestBloc()..add(RequestLoaded(Request(id: 1)));
+            },
+          ),
+            ],
+          ),
+//          body: activeTab == AppTab.todos ? FilteredRequest() : Stats(),
+          body: BlocConsumer<RequestBloc, RequestState>(
+            listener: (context, state) {
+              if (state is RequestMessageOpened) {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) {
+                    print(state.request.title.toString());
+                    return RequestMessagePage(request: state.request);
+                  }),
+                );
+              }
+            },
+            builder: (context, state) {
+              if (state is RequestLoadInProgress) {
+                return LoadingIndicator(key: ArchSampleKeys.todosLoading);
+              } else if (state is RequestLoadSuccess) {
+                final requests = state.requests;
+                return ListView.separated(
+                  separatorBuilder: (context, index) => Divider(
+                    color: Colors.black,
+                  ),
+                  key: ArchSampleKeys.todoList,
+                  itemCount: requests != null && requests.length > 0
                       ? requests.length
                       : 0,
-            itemBuilder: (BuildContext context, int index) {
-              final request = requests[index];
-              //print("HEEYYYY"+request.title.toString());
-              return RequestTile(
-                
-                request: request,
-                onDismissed: (direction) {},
-                onTap: () async {
-                  print("tapped");
-                  /* BlocProvider<RequestBloc>(
+                  itemBuilder: (BuildContext context, int index) {
+                    final request = requests[index];
+                    //print("HEEYYYY"+request.title.toString());
+                    return RequestTile(
+                      request: request,
+                      onDismissed: (direction) {},
+                      onTap: () async {
+                        print("tapped");
+                        /* BlocProvider<RequestBloc>(
                     create: (context) =>
                         RequestBloc()..add(RequestMessageOpen(request)),
                   ); */
 
-                  BlocProvider.of<RequestBloc>(context).add(RequestMessageOpen(request));
-                },
+                        BlocProvider.of<RequestBloc>(context)
+                            .add(RequestMessageOpen(request));
+                      },
 //                onCheckboxChanged: (_) {
 //                  BlocProvider.of<RequestBloc>(context).add(
 //                    TodoUpdated(request.copyWith(complete: !request.complete)),
 //                  );
 //                },
-              );
+                    );
+                  },
+                );
+              } else {
+                return Container(key: AppKeys.filteredRequestEmptyContainer);
+              }
             },
-          );
-        } else {
-          return Container(key: AppKeys.filteredRequestEmptyContainer);
-        }
-      },
-    );
+          ),
+        ));
   }
 }

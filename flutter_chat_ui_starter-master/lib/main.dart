@@ -43,33 +43,7 @@ class RequestApp extends StatelessWidget {
       ],
       routes: {
         ArchSampleRoutes.home: (context) {
-          return MultiBlocProvider(
-            providers: [
-              BlocProvider<RequestBloc>(
-                create: (context) => RequestBloc()..add(RequestLoaded(Request(id: 1))),
-              ),
-            ],
-            child: Scaffold(
-              appBar: AppBar(
-                title: Text(FlutterBlocLocalizations.of(context).appTitle),
-              ),
-//          body: activeTab == AppTab.todos ? FilteredRequest() : Stats(),
-              body: RequestPage(),
-              floatingActionButton: FloatingActionButton(
-                key: ArchSampleKeys.addTodoFab,
-                onPressed: () {
-                  Navigator.pushNamed(context, ArchSampleRoutes.addTodo);
-                },
-                child: Icon(Icons.add),
-                tooltip: ArchSampleLocalizations.of(context).addTodo,
-              ),
-//          bottomNavigationBar: TabSelector(
-//            activeTab: activeTab,
-//            onTabSelected: (tab) =>
-//                BlocProvider.of<TabBloc>(context).add(TabUpdated(tab)),
-//          ),
-            ),
-          );
+          return RequestPage();
         },
       },
     );
