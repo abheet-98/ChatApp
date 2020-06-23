@@ -10,7 +10,8 @@ final Http http = Http();
 class Http extends BaseHttp {
   @override
   void init() {
-    options.baseUrl = 'https://qa.be-there.co/api/v1';
+    options.baseUrl = 'http://192.168.43.240:8004/api/v1';
+//    options.baseUrl = 'https://qa.be-there.co/api/v1';
     interceptors..add(ApiInterceptor())
         /*// Cookie persistence asynchronous
       ..add(CookieManager(
@@ -27,7 +28,7 @@ class ApiInterceptor extends InterceptorsWrapper {
         ' data: ${options.data}');
 //    SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    var token = await StorageManager.getToken();
+    var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6Imxrc2luZ2giLCJleHAiOjE2MDgzNTU3NTcsImVtYWlsIjoibGtzaW5naC5pbmRpYUBnbWFpbC5jb20ifQ.MabwVR2S4QroWsD5TlNP-IQFhA-Cy5nrQzPIMJF3jd0";//await StorageManager.getToken();
     if (token != null) {
       options.headers.addAll({"Authorization": "JWT $token"});
     }

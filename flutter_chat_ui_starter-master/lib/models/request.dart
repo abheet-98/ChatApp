@@ -3,15 +3,13 @@ import 'package:equatable/equatable.dart';
 class Request extends Equatable {
   int id;
   String title;
-//  String name;
-//  String url;
-//  String task;
-  int toUser;
-  int fromUser;
-  int adminUser;
+  String imageUrl;
+  User toUser;
+  User fromUser;
+  User adminUser;
   int influencer;
   bool seen;
-  String seenAt;
+  Null seenAt;
   String lastMessage;
   int lastMessageId;
   String createdAt;
@@ -22,33 +20,34 @@ class Request extends Equatable {
 
   Request(
       {this.id,
-      this.title,
-//        this.name,
-//        this.url,
-//        this.task,
-      this.toUser,
-      this.fromUser,
-      this.adminUser,
-      this.influencer,
-      this.seen,
-      this.seenAt,
-      this.lastMessage,
-      this.lastMessageId,
-      this.createdAt,
-      this.updatedAt,
-      this.createdBy,
-      this.updatedBy,
-      this.recordStatus});
+        this.title,
+        this.imageUrl,
+        this.toUser,
+        this.fromUser,
+        this.adminUser,
+        this.influencer,
+        this.seen,
+        this.seenAt,
+        this.lastMessage,
+        this.lastMessageId,
+        this.createdAt,
+        this.updatedAt,
+        this.createdBy,
+        this.updatedBy,
+        this.recordStatus});
 
   Request.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
-//    name = json['name'];
-//    url = json['url'];
-//    task = json['task'];
-    toUser = json['to_user'];
-    fromUser = json['from_user'];
-    adminUser = json['admin_user'];
+    imageUrl = json['image_url'];
+    toUser =
+    json['to_user'] != null ? new User.fromJson(json['to_user']) : null;
+    fromUser = json['from_user'] != null
+        ? new User.fromJson(json['from_user'])
+        : null;
+    adminUser = json['admin_user'] != null
+        ? new User.fromJson(json['admin_user'])
+        : null;
     influencer = json['influencer'];
     seen = json['seen'];
     seenAt = json['seen_at'];
@@ -65,12 +64,16 @@ class Request extends Equatable {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['title'] = this.title;
-//    data['name'] = this.name;
-//    data['url'] = this.url;
-//    data['task'] = this.task;
-    data['to_user'] = this.toUser;
-    data['from_user'] = this.fromUser;
-    data['admin_user'] = this.adminUser;
+    data['image_url'] = this.imageUrl;
+    if (this.toUser != null) {
+      data['to_user'] = this.toUser.toJson();
+    }
+    if (this.fromUser != null) {
+      data['from_user'] = this.fromUser.toJson();
+    }
+    if (this.adminUser != null) {
+      data['admin_user'] = this.adminUser.toJson();
+    }
     data['influencer'] = this.influencer;
     data['seen'] = this.seen;
     data['seen_at'] = this.seenAt;
@@ -83,14 +86,21 @@ class Request extends Equatable {
     data['record_status'] = this.recordStatus;
     return data;
   }
+  Map<String, dynamic> paramToJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['request_id'] = this.id;
+    return data;
+  }
+
 
   @override
   // TODO: implement props
   List<Object> get props => [];
 }
 
-/* class RequestMessage  extends Equatable  {
+class RequestMessage  extends Equatable  {
   int id;
+  String itemTitle;
   User user;
   int actionByUser;
   String objectType;
@@ -121,6 +131,7 @@ class Request extends Equatable {
 
   RequestMessage(
       {this.id,
+        this.itemTitle,
         this.user,
         this.actionByUser,
         this.objectType,
@@ -151,6 +162,7 @@ class Request extends Equatable {
 
   RequestMessage.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    itemTitle = json['item_title'];
     user = json['user'] != null ? new User.fromJson(json['user']) : null;
     actionByUser = json['action_by_user'];
     objectType = json['object_type'];
@@ -158,10 +170,10 @@ class Request extends Equatable {
     filtered_request = json['filtered_request'];
     referenceMessage = json['reference_message'];
     replyMessage = json['reply_message'];
-    objectData = json['object_data'] != null
+    objectData = json['object_data'] != null && json['object_data'].isNotEmpty
         ? new ObjectData.fromJson(json['object_data'])
         : null;
-    if (json['media_data'] != null) {
+    if (json['media_data'] != null && json['media_data'].isNotEmpty) {
       mediaData = new List<MediaData>();
       json['media_data'].forEach((v) {
         mediaData.add(new MediaData.fromJson(v));
@@ -191,6 +203,7 @@ class Request extends Equatable {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
+    data['item_title'] = this.itemTitle;
     if (this.user != null) {
       data['user'] = this.user.toJson();
     }
@@ -232,7 +245,7 @@ class Request extends Equatable {
   @override
   // TODO: implement props
   List<Object> get props => [];
-} */
+}
 
 class User {
   int id;
@@ -324,46 +337,46 @@ class Status {
     return data;
   }
 }
-
-class RequestMessage extends Equatable {
-  int id;
-  bool seen;
-  String messageText;
-  String itemTitle;
-  String status;
-  String createdDate;
-
-  RequestMessage({
-    this.id,
-    this.seen,
-    this.messageText,
-    this.itemTitle,
-    this.status,
-    this.createdDate,
-  });
-
-  RequestMessage.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    seen = json['seen'];
-    messageText = json['message_text'];
-    itemTitle = json['item_title'];
-    status = json['status'];
-    createdDate = json['created_date'];
-    
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['seen'] = this.seen;
-    data['message_text'] = this.messageText;
-    data['item_title'] = this.itemTitle;
-    data['status'] = this.status;
-    data['created_date'] = this.createdDate;
-    return data;
-  }
-
-  @override
-  // TODO: implement props
-  List<Object> get props => [];
-}
+//
+//class RequestMessage extends Equatable {
+//  int id;
+//  bool seen;
+//  String messageText;
+//  String itemTitle;
+//  String status;
+//  String createdDate;
+//
+//  RequestMessage({
+//    this.id,
+//    this.seen,
+//    this.messageText,
+//    this.itemTitle,
+//    this.status,
+//    this.createdDate,
+//  });
+//
+//  RequestMessage.fromJson(Map<String, dynamic> json) {
+//    id = json['id'];
+//    seen = json['seen'];
+//    messageText = json['message_text'];
+//    itemTitle = json['item_title'];
+//    status = json['status'];
+//    createdDate = json['created_date'];
+//
+//  }
+//
+//  Map<String, dynamic> toJson() {
+//    final Map<String, dynamic> data = new Map<String, dynamic>();
+//    data['id'] = this.id;
+//    data['seen'] = this.seen;
+//    data['message_text'] = this.messageText;
+//    data['item_title'] = this.itemTitle;
+//    data['status'] = this.status;
+//    data['created_date'] = this.createdDate;
+//    return data;
+//  }
+//
+//  @override
+//  // TODO: implement props
+//  List<Object> get props => [];
+//}

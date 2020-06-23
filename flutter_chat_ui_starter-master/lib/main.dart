@@ -46,7 +46,7 @@ class RequestApp extends StatelessWidget {
           return MultiBlocProvider(
             providers: [
               BlocProvider<RequestBloc>(
-                create: (context) => RequestBloc()..add(RequestLoaded(null)),
+                create: (context) => RequestBloc()..add(RequestLoaded(Request(id: 1))),
               ),
             ],
             child: Scaffold(

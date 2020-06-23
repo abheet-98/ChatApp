@@ -105,7 +105,7 @@ class RequestMessageTile extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(this.requestMessage.status),
+                      Text(this.requestMessage.status.text),
                       SizedBox(height: 5.0,),
                       Text(this.requestMessage.createdDate),
                     ],

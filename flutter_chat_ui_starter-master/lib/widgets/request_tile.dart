@@ -38,8 +38,8 @@ class RequestTile extends StatelessWidget {
                 children: <Widget>[
                   CachedNetworkImage(
                     //https://ik.imagekit.io/bethere/tr:w-500,c-fill,q-auto/public/556b7519-4e7.jpeg?ik-sdk-version=python-2.2.4
-                    imageUrl:
-                        "https://ik.imagekit.io/bethere/tr:w-500,c-fill,q-auto/public/556b7519-4e7.jpeg?ik-sdk-version=python-2.2.4",
+                    imageUrl: request.imageUrl,
+//                        "https://ik.imagekit.io/bethere/tr:w-500,c-fill,q-auto/public/556b7519-4e7.jpeg?ik-sdk-version=python-2.2.4",
                     placeholder: (context, url) =>
                         Center(child: CircularProgressIndicator()),
                     errorWidget: (context, url, error) => Image.asset(
@@ -81,7 +81,7 @@ class RequestTile extends StatelessWidget {
                       Container(
                         width: MediaQuery.of(context).size.width * 0.60,
                         child: Text(
-                          request.title,
+                          request.lastMessage,
                           style: TextStyle(fontSize: 14.0),
                           overflow: TextOverflow.ellipsis,
                         ),
