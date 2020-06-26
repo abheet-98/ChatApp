@@ -18,7 +18,8 @@ import 'package:path_provider/path_provider.dart';
 /// a real server but simply emulates the functionality.
 class WebClient {
   final Duration delay;
-  final Future<Directory> Function() getDirectory = getApplicationDocumentsDirectory;
+  final Future<Directory> Function() getDirectory =
+      getApplicationDocumentsDirectory;
 //  Future<Directory> getDirectory = FileStorage(
 //              '__flutter_bloc_app__',
 //              getApplicationDocumentsDirectory,
@@ -179,13 +180,8 @@ class WebClient {
         .map<Request>((_request) => Request.fromJson(_request))
         .toList();
     debugPrint('requestList file: ${requestList.toString()}');
-    return Future.delayed(
-        delay,
-        () => requestList);
+    return Future.delayed(delay, () => requestList);
   }
-
-
-
 
   /// Mock that "fetches" some Request from a "web service" after a short delay
   ///
@@ -625,12 +621,71 @@ class WebClient {
     final json = JsonDecoder().convert(string);
     debugPrint('fetchRequestMessages json: $json');
     final requestMessagesList = (json['result'])
-        .map<RequestMessage>((_requestMessage) => RequestMessage.fromJson(_requestMessage))
+        .map<RequestMessage>(
+            (_requestMessage) => RequestMessage.fromJson(_requestMessage))
         .toList();
     debugPrint('requestMessagesList file: ${requestMessagesList.toString()}');
-    return Future.delayed(
-        delay,
-        () => requestMessagesList);
+    return Future.delayed(delay, () => requestMessagesList);
+  }
+
+  Future<ObjectData> fetchObjectData(RequestMessage requestMessage) async {
+    debugPrint('load fetchObjectData request: ${requestMessage}');
+//    final file = await _getLocalFile();
+//    final string = await file.readAsString();
+    final string = await '''{
+  "result": 
+    
+      {
+        "id": 178,
+        "account_influencer": 165,
+        "influencer": 161,
+        "influencer_name": "LAKHVINDER SINGH",
+        "user": {
+          "id": 1,
+          "name": "LK Singh INDIA",
+          "username": "lksingh",
+          "email": "lksingh.india@gmail.com",
+          "mobile_number": "917073319109",
+          "address": "LK Singh INDIA"
+        },
+        "influencer_username": "lksingh3",
+        "order": {
+          "id": 176,
+          "influencer_booking": 178,
+          "promo": 9,
+          "promo_code": "code-17",
+          "gross_amount": 1000.0,
+          "reference_number": "20-000-176",
+          "discount": 100.0,
+          "total_amount": "900",
+          "online_order_id": null,
+          "online_transaction_id": "pay_F6kpwwJLmp5tFF",
+          "advance_amount": "900",
+          "amount": "900",
+          "order_date": "Thu, 25/06/2020, 11:44 AM",
+          "item": {
+            "sub_item_id": 377,
+            "sub_item_name": "Video Message"
+          }
+        },
+        "negotiate_id": 10,
+        "negotiation": {
+          "id": 10,
+          "amount": "900"
+        },
+        "instructions": "When your request is completed, we'll email and text you a link to view, share, or download.",
+        "shared_link": ""
+
+    },
+  
+  "status": 200
+}''';
+
+    final json = JsonDecoder().convert(string);
+    debugPrint('fetchObjectData json: $json');
+    final objectData = ObjectData.fromJson(json['result']);
+    debugPrint('objectData file: ${objectData.toString()}');
+    return Future.delayed(delay, () => objectData);
   }
 
   /// Mock that returns true or false for success or failure. In this case,

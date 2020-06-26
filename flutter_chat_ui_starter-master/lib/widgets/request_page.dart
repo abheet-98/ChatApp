@@ -75,19 +75,11 @@ class RequestPage extends StatelessWidget {
                       onDismissed: (direction) {},
                       onTap: () async {
                         print("tapped");
-                        /* BlocProvider<RequestBloc>(
-                    create: (context) =>
-                        RequestBloc()..add(RequestMessageOpen(request)),
-                  ); */
 
                         BlocProvider.of<RequestBloc>(context)
                             .add(RequestMessageOpen(request));
                       },
-//                onCheckboxChanged: (_) {
-//                  BlocProvider.of<RequestBloc>(context).add(
-//                    TodoUpdated(request.copyWith(complete: !request.complete)),
-//                  );
-//                },
+
                     );
                   },
                 );

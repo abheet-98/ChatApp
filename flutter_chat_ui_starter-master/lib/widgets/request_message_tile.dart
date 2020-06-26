@@ -1,3 +1,4 @@
+import 'package:bethere_app/blocs/requestmessage/request_message.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:bethere_app/models/request.dart';
 import 'package:bethere_app/core/todos_app_core.dart';
 import 'package:bethere_app/models/models.dart';
 import 'package:badges/badges.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RequestMessageTile extends StatelessWidget {
   final DismissDirectionCallback onDismissed;
@@ -28,65 +30,55 @@ class RequestMessageTile extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: Container(
-          height: 60.0,
-          margin: EdgeInsets.only(top: 5.0, bottom: 5.0, right: 10.0, left: 5.0),
+          //height: 150.0,
+          margin:
+          EdgeInsets.only(top: 5.0, bottom: 1.0, right: 5.0, left: 5.0),
           padding: EdgeInsets.symmetric(horizontal: 1.0, vertical: 5.0),
-          decoration: BoxDecoration(color: Colors.blueGrey[50]),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey,
+                    offset: Offset(0.0, 1.0), //(x,y)
+                    blurRadius: 2.0,
+                  ),
+                ],
+            ),
+          // child: Row(
+          //   //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //   children: <Widget>[
+          child: Column(
             children: <Widget>[
               Row(
                 children: <Widget>[
-                  /* CachedNetworkImage(
-                    //https://ik.imagekit.io/bethere/tr:w-500,c-fill,q-auto/public/556b7519-4e7.jpeg?ik-sdk-version=python-2.2.4
-                    imageUrl:
-                        "https://ik.imagekit.io/bethere/tr:w-500,c-fill,q-auto/public/556b7519-4e7.jpeg?ik-sdk-version=python-2.2.4",
-                    placeholder: (context, url) =>
-                        Center(child: CircularProgressIndicator()),
-                    errorWidget: (context, url, error) => Image.asset(
-                      "assets/images_main/blank-profile-picture.png",
-                      fit: BoxFit.cover,
-                      width: MediaQuery.of(context).size.width / 7.5,
-                      height: MediaQuery.of(context).size.height / 9.8,
-                    ),
-                    width: MediaQuery.of(context).size.width / 5.2,
-                    height: MediaQuery.of(context).size.height / 7,
-                    fit: BoxFit.cover,
-                    imageBuilder: (context, imageProvider) => Container(
-                      width: 70.0,
-                      height: 70.0,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                            image: imageProvider, fit: BoxFit.cover),
-                      ),
-                    ),
-                  ), */
-                  /* CircleAvatar(
-                    radius: 35.0,
-                    backgroundImage: AssetImage(requestMessage.url),
-                  ), */
+                  
                   SizedBox(
-                    width: 5.0,
+                    width: MediaQuery.of(context).size.width * 0.01,
                   ),
                   Badge(
                     badgeColor: Colors.deepPurple,
                     shape: BadgeShape.circle,
                     /* borderRadius: 20,
-                    toAnimate: false,
-                    badgeContent:
-                        Text('NEW', style: TextStyle(color: Colors.white)), */
-                    showBadge: this.requestMessage.seen,
+                        toAnimate: false,
+                        badgeContent:
+                            Text('NEW', style: TextStyle(color: Colors.white)), */
+                    //showBadge: this.requestMessage.seen,
                   ),
                   SizedBox(
-                    width: 15.0,
+                    width: MediaQuery.of(context).size.width * 0.03,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(
-                        this.requestMessage.itemTitle != null ? this.requestMessage.itemTitle : 'Blank',
-                        style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18.0),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.60,
+                        child: Text(
+                          this.requestMessage.itemTitle != null
+                              ? this.requestMessage.itemTitle
+                              : 'Blank',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18.0),
+                        ),
                       ),
                       SizedBox(
                         height: 5.0,
@@ -94,34 +86,142 @@ class RequestMessageTile extends StatelessWidget {
                       Container(
                         width: MediaQuery.of(context).size.width * 0.60,
                         child: Text(
-                          this.requestMessage.messageText != null ? this.requestMessage.messageText : 'Blank',
+                          this.requestMessage.messageText != null
+                              ? this.requestMessage.messageText
+                              : 'Blank',
+                          maxLines: 4,
                           style: TextStyle(fontSize: 15.0),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.60,
+                        child: Text(this.requestMessage.createdDate),
+                        // child: Text(
+                        //   this.requestMessage.messageText != null
+                        //       ? this.requestMessage.messageText
+                        //       : 'Blank',
+                        //   style: TextStyle(fontSize: 15.0),
+                        //   overflow: TextOverflow.ellipsis,
+                        // ),
+                      ),
                     ],
                   ),
-                  SizedBox(width: 15.0,),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.0001,
+                  ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(this.requestMessage.status.text),
-                      SizedBox(height: 5.0,),
-                      Text(this.requestMessage.createdDate),
+                      // SizedBox(
+                      //   height: 5.0,
+                      // ),
+                      // Text(this.requestMessage.createdDate),
                     ],
                   ),
                 ],
               ),
-              /* Column(
-            children: <Widget>[
-              Text(requestMessage.),
-              SizedBox(
-                height: 5.0,
-              ),
-            ],
-          ) */
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  // SizedBox(
+                  //   width: MediaQuery.of(context).size.width / 4,
+                  // ),
+                  Container(
+                    width: MediaQuery.of(context).size.width / 4,
+                    child: RaisedButton(
+                      color: Theme.of(context).accentColor,
+                      onPressed: () {
+                        BlocProvider.of<RequestMessageBloc>(context)
+                            .add(RequestMessageAccept(this.requestMessage));
+                      },
+                      // child: Padding(
+                      //   padding: EdgeInsets.all(1.0),
+                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text(
+                              'Accept',
+                              style: TextStyle(
+                                fontSize: 12,
+                                
+                                color: Colors.white,
+                              ),
+                            ),
+                            Icon(
+                              
+                              Icons.check_circle,
+                              color: Colors.white,
+                              size: 28.0,
+                            )
+                          ],
+                        ),
+                      //),
+                    ),
+
+                    // child: Row(
+                    //   children: <Widget>[
+                    //     Text("Accept"),
+                    //     IconButton(
+                    //       icon: const Icon(Icons.check_box),
+                    //       tooltip: 'Accept',
+                    //       onPressed: () {
+                    //         // RequestBloc()..add(RequestLoaded(Request(id: 1)));
+                    //       },
+                    //     ),
+                    //   ],
+                    // ),
+                  ),
+
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width / 20,
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width / 4,
+                    child: RaisedButton(
+                      color: Theme.of(context).accentColor,
+                      onPressed: () {
+                        BlocProvider.of<RequestMessageBloc>(context)
+                            .add(RequestMessageReject(this.requestMessage));
+                      },
+                      // child: Padding(
+                      //   padding: EdgeInsets.all(1.0),
+                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text(
+                              'Reject',
+                              style: TextStyle(
+                                fontSize: 12,
+                                
+                                color: Colors.white,
+                              ),
+                            ),
+                            CircleAvatar(
+                              backgroundColor: Colors.white,
+                              radius: 12.0,
+                                                          child: Icon(
+                                Icons.clear,
+                                color: Theme.of(context).accentColor,
+                              ),
+                            )
+                          ],
+                        ),
+                      //),
+                    ),
+
+                    
+                  ),
+                  
+                  // SizedBox(
+                  //   width: MediaQuery.of(context).size.width / 4,
+                  // ),
+                ],
+              )
             ],
           ),
+          
         ),
       ),
     );

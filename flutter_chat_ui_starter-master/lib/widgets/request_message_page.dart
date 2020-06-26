@@ -1,3 +1,4 @@
+import 'package:bethere_app/widgets/request_message_details_page.dart';
 import 'package:bethere_app/widgets/request_message_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
@@ -32,7 +33,14 @@ class RequestMessagePage extends StatelessWidget {
           ),
           body: BlocConsumer<RequestMessageBloc, RequestMessageState>(
             listener: (context, state) {
-//        if(state is )
+              if (state is RequestMessageDetailsOpened) {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) {
+                    print(state.requestMessage.itemTitle.toString());
+                    return RequestMessageDetailsPage(requestMessage: state.requestMessage);
+                  }),
+                );
+              }
             },
             builder: (context, state) {
               if (state is RequestMessageLoadInProgress) {
@@ -47,16 +55,14 @@ class RequestMessagePage extends StatelessWidget {
                       ? requests.length
                       : 0,
                   itemBuilder: (BuildContext context, int index) {
-//                    final request = requests[index];
+                    final requestMessage = requests[index];
                     return RequestMessageTile(
-                      requestMessage: requests[index],
+                      requestMessage: requestMessage,
                       onDismissed: (direction) {},
                       onTap: () async {
-                        final removedTodo = await Navigator.of(context).push(
-                          MaterialPageRoute(builder: (_) {
-//                      return DetailsScreen(id: request.id);
-                          }),
-                        );
+                        print("tapppppped");
+                        BlocProvider.of<RequestMessageBloc>(context)
+                            .add(RequestMessageDetailsOpen(requestMessage));
                       },
 //                onCheckboxChanged: (_) {
 //                  BlocProvider.of<RequestMessageBloc>(context).add(

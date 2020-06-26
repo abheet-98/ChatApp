@@ -252,14 +252,20 @@ class User {
   String username;
   String name;
   String logo;
+  String email;
+  String mobileNumber;
+  String address;
 
-  User({this.id, this.username, this.name, this.logo});
+  User({this.id, this.username, this.name, this.logo,this.email,this.mobileNumber,this.address});
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     username = json['username'];
     name = json['name'];
     logo = json['logo'];
+    email = json['email'];
+    mobileNumber = json['mobile_number'];
+    address = json['address'];
   }
 
   Map<String, dynamic> toJson() {
@@ -268,25 +274,205 @@ class User {
     data['username'] = this.username;
     data['name'] = this.name;
     data['logo'] = this.logo;
+    data['email'] = this.email;
+    data['mobile_number'] = this.mobileNumber;
+    data['address'] = this.address;
     return data;
   }
 }
 
+// class ObjectData {
+//   int id;
+
+//   ObjectData({this.id});
+
+//   ObjectData.fromJson(Map<String, dynamic> json) {
+//     id = json['id'];
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     data['id'] = this.id;
+//     return data;
+//   }
+// }
+
+
 class ObjectData {
   int id;
+  int accountInfluencer;
+  int influencer;
+  String influencerName;
+  User user;
+  String influencerUsername;
+  Order order;
+  int negotiateId;
+  Negotiation negotiation;
+  String instructions;
+  String sharedLink;
 
-  ObjectData({this.id});
+  ObjectData(
+      {this.id,
+      this.accountInfluencer,
+      this.influencer,
+      this.influencerName,
+      this.user,
+      this.influencerUsername,
+      this.order,
+      this.negotiateId,
+      this.negotiation,
+      this.instructions,
+      this.sharedLink});
 
   ObjectData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    accountInfluencer = json['account_influencer'];
+    influencer = json['influencer'];
+    influencerName = json['influencer_name'];
+    user = json['user'] != null ? new User.fromJson(json['user']) : null;
+    influencerUsername = json['influencer_username'];
+    order = json['order'] != null ? new Order.fromJson(json['order']) : null;
+    negotiateId = json['negotiate_id'];
+    negotiation = json['negotiation'] != null
+        ? new Negotiation.fromJson(json['negotiation'])
+        : null;
+    instructions = json['instructions'];
+    sharedLink = json['shared_link'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
+    data['account_influencer'] = this.accountInfluencer;
+    data['influencer'] = this.influencer;
+    data['influencer_name'] = this.influencerName;
+    if (this.user != null) {
+      data['user'] = this.user.toJson();
+    }
+    data['influencer_username'] = this.influencerUsername;
+    if (this.order != null) {
+      data['order'] = this.order.toJson();
+    }
+    data['negotiate_id'] = this.negotiateId;
+    if (this.negotiation != null) {
+      data['negotiation'] = this.negotiation.toJson();
+    }
+    data['instructions'] = this.instructions;
+    data['shared_link'] = this.sharedLink;
     return data;
   }
 }
+
+
+class Order {
+  int id;
+  int influencerBooking;
+  int promo;
+  String promoCode;
+  double grossAmount;
+  String referenceNumber;
+  double discount;
+  String totalAmount;
+  Null onlineOrderId;
+  String onlineTransactionId;
+  String advanceAmount;
+  String amount;
+  String orderDate;
+  Item item;
+
+  Order(
+      {this.id,
+      this.influencerBooking,
+      this.promo,
+      this.promoCode,
+      this.grossAmount,
+      this.referenceNumber,
+      this.discount,
+      this.totalAmount,
+      this.onlineOrderId,
+      this.onlineTransactionId,
+      this.advanceAmount,
+      this.amount,
+      this.orderDate,
+      this.item});
+
+  Order.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    influencerBooking = json['influencer_booking'];
+    promo = json['promo'];
+    promoCode = json['promo_code'];
+    grossAmount = json['gross_amount'];
+    referenceNumber = json['reference_number'];
+    discount = json['discount'];
+    totalAmount = json['total_amount'];
+    onlineOrderId = json['online_order_id'];
+    onlineTransactionId = json['online_transaction_id'];
+    advanceAmount = json['advance_amount'];
+    amount = json['amount'];
+    orderDate = json['order_date'];
+    item = json['item'] != null ? new Item.fromJson(json['item']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['influencer_booking'] = this.influencerBooking;
+    data['promo'] = this.promo;
+    data['promo_code'] = this.promoCode;
+    data['gross_amount'] = this.grossAmount;
+    data['reference_number'] = this.referenceNumber;
+    data['discount'] = this.discount;
+    data['total_amount'] = this.totalAmount;
+    data['online_order_id'] = this.onlineOrderId;
+    data['online_transaction_id'] = this.onlineTransactionId;
+    data['advance_amount'] = this.advanceAmount;
+    data['amount'] = this.amount;
+    data['order_date'] = this.orderDate;
+    if (this.item != null) {
+      data['item'] = this.item.toJson();
+    }
+    return data;
+  }
+}
+
+class Item {
+  int subItemId;
+  String subItemName;
+
+  Item({this.subItemId, this.subItemName});
+
+  Item.fromJson(Map<String, dynamic> json) {
+    subItemId = json['sub_item_id'];
+    subItemName = json['sub_item_name'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['sub_item_id'] = this.subItemId;
+    data['sub_item_name'] = this.subItemName;
+    return data;
+  }
+}
+
+class Negotiation {
+  int id;
+  String amount;
+
+  Negotiation({this.id, this.amount});
+
+  Negotiation.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    amount = json['amount'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['amount'] = this.amount;
+    return data;
+  }
+}
+
 
 class MediaData {
   int id;

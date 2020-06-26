@@ -58,4 +58,20 @@ class RequestApiProvider {
 //     }
   }
 
+Future<ObjectData> getObjectData(RequestMessage requestMessage) async {
+    // var response = await http.get('/request/list/',queryParameters: request.toJson());
+    // // print(response);
+    // return response.data
+    //     .map<Request>((item) => Request.fromJson(item))
+    //     .toList();
+    {
+      final todos = await webClient.fetchObjectData(requestMessage);
+
+//      fileStorage.saveRequest(todos);
+
+      return todos;
+    }
+
+
+  }
 }

@@ -12,5 +12,8 @@ class RequestRepository {
 
   Future<List<RequestMessage>> getRequestMessageList(Request request) => requestApiProvider.getRequestMessageList(request);
 
+  Future<ObjectData> getObjectData(RequestMessage requestMessage) => requestApiProvider.getObjectData(requestMessage);
+
+
 
 }

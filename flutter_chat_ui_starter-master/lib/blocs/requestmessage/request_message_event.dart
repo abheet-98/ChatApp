@@ -21,7 +21,42 @@ class RequestMessageLoaded extends RequestMessageEvent {
   String toString() => 'RequestMessageLoaded { request: $request }';
 }
 
+class RequestMessageDetailsOpen extends RequestMessageEvent {
+  final RequestMessage requestMessage;
 
+  const RequestMessageDetailsOpen(this.requestMessage);
+
+  @override
+  List<Object> get props => [requestMessage];
+
+  @override
+  String toString() => 'RequestMessageDetailsOpen { request: $requestMessage }';
+}
+
+class RequestMessageAccept extends RequestMessageEvent {
+  final RequestMessage requestMessage;
+
+  const RequestMessageAccept(this.requestMessage);
+
+  @override
+  List<Object> get props => [requestMessage];
+
+  @override
+  String toString() => 'RequestMessageAccept { request: $requestMessage }';
+}
+
+
+class RequestMessageReject extends RequestMessageEvent {
+  final RequestMessage requestMessage;
+
+  const RequestMessageReject(this.requestMessage);
+
+  @override
+  List<Object> get props => [requestMessage];
+
+  @override
+  String toString() => 'RequestMessageReject { request: $requestMessage }';
+}
 /* class TodoAdded extends RequestMessageEvent {
   final User todo;
 

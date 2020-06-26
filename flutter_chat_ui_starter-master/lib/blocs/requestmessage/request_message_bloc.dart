@@ -19,7 +19,15 @@ class RequestMessageBloc extends Bloc<RequestMessageEvent, RequestMessageState> 
     if (event is RequestMessageLoaded) {
       yield* _mapRequestLoadedToState(event);
     }
-    
+    else if (event is RequestMessageAccept) {
+      yield* _mapRequestAcceptToState(event);
+    }
+    else if (event is RequestMessageReject) {
+      yield* _mapRequestRejectToState(event);
+    }
+    else if(event is RequestMessageDetailsOpen){
+      yield* _mapRequestDetailsOpenToState(event);
+    }
   }
 
   Stream<RequestMessageState> _mapRequestLoadedToState(event) async* {
@@ -33,6 +41,38 @@ class RequestMessageBloc extends Bloc<RequestMessageEvent, RequestMessageState> 
     }
   }
 
-  
+  Stream<RequestMessageState> _mapRequestAcceptToState(event) async* {
+    // try {
+    //   final requests = await this.requestRepository.getRequestMessageList(event.request);
+    //   debugPrint(requests.toString()); 
+    //   yield RequestMessageLoadSuccess(requests);
+    // } catch (error) {
+    //   debugPrint(error.toString());
+    //   yield RequestMessageLoadFailure();
+    // }
+  }
+
+  Stream<RequestMessageState> _mapRequestRejectToState(event) async* {
+    // try {
+    //   final requests = await this.requestRepository.getRequestMessageList(event.request);
+    //   debugPrint(requests.toString()); 
+    //   yield RequestMessageLoadSuccess(requests);
+    // } catch (error) {
+    //   debugPrint(error.toString());
+    //   yield RequestMessageLoadFailure();
+    // }
+  }
+
+  Stream<RequestMessageState> _mapRequestDetailsOpenToState(event) async* {
+    try {
+      //final requests = await this.requestRepository.loadRequest(event.request);
+      //debugPrint(requests.toString());
+      yield RequestMessageDetailsOpened(event.requestMessage);
+    } catch (error) {
+      debugPrint(error.toString());
+      yield RequestMessageLoadFailure();
+    }
+  }
+
 
 }
